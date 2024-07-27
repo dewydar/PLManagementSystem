@@ -1,0 +1,77 @@
+﻿@model PaginationResponseModelV2
+
+@{
+    var PagingModel = Model;
+    // using the ViewData direct without copy lead to appened other paramter from other ancor tags
+    var FilterQueryStringDictionary = new Dictionary<string, string>();
+    if (ViewData["QueryStringDictionary"] != null)
+    {
+        FilterQueryStringDictionary = new Dictionary<string, string>(ViewData["QueryStringDictionary"] as Dictionary<string, string>);
+    }
+
+
+
+}
+
+@{
+    var IsFirstDisabled = !PagingModel.ShowFirst ? "disabled" : "";
+    var IsPrevDisabled = !PagingModel.ShowPrevious ? "disabled" : "";
+    var IsNextDisabled = !PagingModel.ShowNext ? "disabled" : "";
+    var IsLastDisabled = !PagingModel.ShowLast ? "disabled" : "";
+
+
+    int MaxPageslinks = 10;
+    int FirstVisablePage;
+    int LastVisablePage;
+    if (PagingModel.TotalPagesCount <= MaxPageslinks)
+    {
+        FirstVisablePage = 1;
+        LastVisablePage = PagingModel.TotalPagesCount;
+    }
+    else
+    {
+        FirstVisablePage = PagingModel.PageIndex;
+        LastVisablePage = PagingModel.PageIndex + MaxPageslinks - 1;
+        if (LastVisablePage > PagingModel.TotalPagesCount)
+        {
+            FirstVisablePage = PagingModel.TotalPagesCount - 9;
+            LastVisablePage = PagingModel.TotalPagesCount;
+        }
+    }
+}
+
+@{
+    if (PagingModel.TotalPagesCount > 1)
+    {
+
+        <div style="height: 34px; line-height: 34px;float: left; vertical-align: middle;color: #337ab7;"> 
+
+        Total Records ( @(PagingModel.TotalItemCount) )
+
+        </div>
+
+        <ul class="pagination  no-margin pull-right" style="background-color:lightgray">
+         
+        <li class="page-item @IsFirstDisabled">
+                <a asp-action="GetListViewAsJson"  asp-all-route-data="FilterQueryStringDictionary" asp-route-PageIndex="1" onclick="jQueryAjaxGetUrl($(this).attr('href')); return false;" class="page-link">First</a>
+        </li>
+        <li class="page-item @IsPrevDisabled">
+                <a asp-action="GetListViewAsJson" asp-all-route-data="FilterQueryStringDictionary" asp-route-PageIndex="@(PagingModel.PageIndex -1)" onclick="jQueryAjaxGetUrl($(this).attr('href')); return false;" class="page-link">Previous</a>
+        </li>
+      
+        @for (var p = FirstVisablePage; p <= LastVisablePage; p++)
+        {
+            <li class="page-item @(PagingModel.PageIndex == p? "active":"")">
+                    <a asp-action="GetListViewAsJson" asp-all-route-data="FilterQueryStringDictionary" asp-route-PageIndex="@p" onclick="jQueryAjaxGetUrl($(this).attr('href')); return false;" class="page-link">@p</a>
+            </li>
+        }
+        <li class="page-item @IsNextDisabled">
+                <a asp-action="GetListViewAsJson" asp-all-route-data="FilterQueryStringDictionary" asp-route-PageIndex="@(PagingModel.PageIndex +1)" onclick="jQueryAjaxGetUrl($(this).attr('href')); return false;" class="page-link">Next</a>
+        </li>
+        <li class="page-item  @IsLastDisabled">
+                <a asp-action="GetListViewAsJson" asp-all-route-data="FilterQueryStringDictionary" asp-route-PageIndex="@(PagingModel.TotalPagesCount)" onclick="jQueryAjaxGetUrl($(this).attr('href')); return false;" class="page-link">Last</a>
+        </li>
+
+    </ul>
+    }
+}

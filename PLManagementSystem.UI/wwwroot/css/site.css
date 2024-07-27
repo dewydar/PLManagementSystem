@@ -1,0 +1,36 @@
+﻿
+html{
+    direction:rtl;
+}
+body {
+    background-color: #f6f6f6;
+    
+}
+.validation
+{
+    color:red;
+}
+.deleteSearchBtn {
+    margin-top: 2rem;
+    margin-left: 3rem;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    /* color: #fff; */
+    text-decoration: none;
+     background-color: transparent; 
+}
+
+.btn-secondary {
+    /* color: #fff; */
+    background-color: #6c757d;
+    border-color: #6c757d;
+    box-shadow: none;
+}
+
+.projectName-Text{
+    color:#000;
+}
+.dark-mode .projectName-Text {
+    color: #ced4da;
+}

@@ -1,0 +1,46 @@
+﻿
+@{
+	SortVM SortModel = new SortVM();
+	if (ViewData["SortModel"] != null)
+	{
+		SortModel = ViewData["SortModel"] as SortVM;
+	}
+
+	var sortColumn = SortModel.SortColumn;
+	var sortDir = SortModel.SortDirection;
+
+}
+
+<div>
+	<div class="form-inline" style="margin-bottom:10px;">
+		<label for="columnDropdown">Sort by : </label>
+		<select id="ColumnDropdown" class="form-control ColumnDropdown" onchange="SortTable()">
+			@foreach (var col in SortModel.Columns.Where(a=>a.IsSortable))
+			{
+				if (col.ColumnName == sortColumn)
+				{
+
+					<option selected value="@col.ColumnName">@col.ColumnDisplayName</option>
+				}
+				else
+				{
+					<option  value="@col.ColumnName">@col.ColumnDisplayName</option>
+				}
+			}
+		</select>
+	
+		<select id="DirectionDropdown" class="form-control DirectionDropdown" value="des" onchange="SortTable();">
+			@if (sortDir == "asc")
+			{
+				<option value="asc" selected>Asc</option>
+				<option value="des">Des</option>
+			}
+			else
+			{
+				<option value="asc">Asc</option>
+				<option value="des" selected>Des</option>
+			}
+		</select>
+	</div>
+</div>
+

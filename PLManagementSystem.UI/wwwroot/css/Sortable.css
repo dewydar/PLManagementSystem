@@ -1,0 +1,11 @@
+﻿#sortable_table_tbody tr td:first-child:hover {
+    background-color: #0094ff;
+    color: #fff;
+    cursor: grab;
+}
+
+/*.SortColume:hover {
+    background-color: #0094ff;
+    color: #fff;
+    cursor: grab;
+}*/

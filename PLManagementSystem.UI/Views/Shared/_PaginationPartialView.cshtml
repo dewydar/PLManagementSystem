@@ -1,0 +1,66 @@
+﻿@model PaginationResponseModel
+<div class="box-footer clearfix" style="background-color:transparent !important">
+    @{
+        if (Model.TotalItemCount > PaginationConst.Limit)
+        {
+            int showMax = PaginationConst.Limit;
+            int startPage;
+            int endPage;
+            if (Model.TotalPagesCount <= showMax)
+            {
+                startPage = 1;
+                endPage = Model.TotalPagesCount;
+            }
+            else
+            {
+                startPage = Model.PageIndex;
+                endPage = Model.PageIndex + showMax - 1;
+                if (endPage > Model.TotalPagesCount)
+                {
+                    startPage = Model.TotalPagesCount - 9;
+                    endPage = Model.TotalPagesCount;
+                }
+            }
+            <ul class="pagination pagination-sm m-0 float-right">
+                @if (Model.PageIndex > 1)
+                {
+                    var backward = Model.PageIndex - 1;
+                    var backwardFast = 1;
+
+                    <li class="page-item ">
+                        <a id="@backwardFast" class="page-link"><i class="fas fa-fast-backward"></i></a>
+                    </li>
+                    <li class="page-item ">
+                        <a id="@backward" class="page-link"><i class="fas fa-step-backward"></i></a>
+                    </li>
+                }
+
+                @for (var p = startPage; p <= endPage; p++)
+                {
+                    <li class="page-item @(Model.PageIndex == p? "active":"")">
+                        <a id="@p" class="page-link" style="cursor: pointer;">@p</a>
+                    </li>
+                }
+                @if (Model.PageIndex < Model.TotalPagesCount)
+                {
+                    var forward = Model.PageIndex + 1;
+                    var forwardFast = Model.TotalPagesCount;
+                    <li class="page-item ">
+                        <a id="@forward" class="page-link"><i class="fas fa-step-forward"></i></a>
+                    </li>
+                    <li class="page-item ">
+                        <a id="@forwardFast" class="page-link"> <i class="fas fa-fast-forward"></i></a>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item left">
+                    Pages @Model.TotalPagesCount out of @Model.TotalPagesCount
+                </li>
+            </ul>
+        }
+    }
+</div>
