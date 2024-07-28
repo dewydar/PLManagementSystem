@@ -6,6 +6,7 @@ using PLManagementSystem.Core.Interfaces.IService;
 using PLManagementSystem.Core.Interfaces.IWrapper;
 using PLManagementSystem.Helpers.Enum;
 using PLManagementSystem.Helpers.Helpers;
+using PLManagementSystem.Helpers.PassHelper;
 using PLManagementSystem.Helpers.ResourceFiles;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,8 @@ namespace PLManagementSystem.Service.Services
                 sort: z => z.Id, sortDirection: "asc");
             return _Mapper.Map<List<ResponseUserDto>>(entities);
         }
-        public async Task<PaginationResponseModel> GetAllPaginantion(string? name = null, string sortDirection = "asc", string sortColumn = "Id",
+        public async Task<PaginationResponseModel> GetAllPaginantion(string? name = null,bool? isActive=null, string sortDirection = "asc",
+            string sortColumn = "Id",
             int offset = 1, int limit = 10, bool ignoreIsDeletedQueryFilter = false)
         {
             Expression<Func<User, object>> Sort = null;
@@ -60,12 +62,25 @@ namespace PLManagementSystem.Service.Services
                 case "Name":
                     Sort = e => e.Name;
                     break;
+                case "IsActive":
+                    Sort = e => e.IsActive;
+                    break;
+                case "UserName":
+                    Sort = e => e.UserName;
+                    break;
+                default:
+                    Sort = e => e.Id;
+                    break;
             }
             List<Expression<Func<User, bool>>> search = new List<Expression<Func<User, bool>>>();
             if (!string.IsNullOrWhiteSpace(name))
             {
                 search.Add(z => z.Name.ToLower().Contains(name.ToLower())
                 || z.Name.ToLower() == name.ToLower());
+            }
+            if (isActive!=null)
+            {
+                search.Add(z => z.IsActive== isActive);
             }
             PagedList<User> PagedResult = await _dataWrapper.UserRepository.GetPagginationItems(search, Sort, sortDirection, offset, limit,
                 ignoreIsDeletedQueryFilter: ignoreIsDeletedQueryFilter);
@@ -86,6 +101,9 @@ namespace PLManagementSystem.Service.Services
                 User entity = _Mapper.Map<User>(dto);
                 var MaxId = await _dataWrapper.UserRepository.GetMaxAsNoTracking(filter: z => z.Id, ignoreIsDeletedQueryFilter: true);
                 entity.Id = MaxId + 1;
+                entity.IsActive = false;
+                entity.IsDeleted = false;
+                entity.Password =WebUiUtility.Encrypt($"P@$$w0rd:{entity.UserName}");
                 await _dataWrapper.UserRepository.Add(entity);
                 await _dataWrapper.UnitOfWork.Commit();
                 ResponseResult response = new ResponseResult()
@@ -112,6 +130,7 @@ namespace PLManagementSystem.Service.Services
             if (!await this.IfExist(dto.Name, dto.Id))
             {
                 var entity = _Mapper.Map<User>(dto);
+                entity.Password = WebUiUtility.Encrypt(entity.Password);
                 _dataWrapper.UserRepository.Update(entity);
                 await _dataWrapper.UnitOfWork.Commit();
                 return new ResponseResult()

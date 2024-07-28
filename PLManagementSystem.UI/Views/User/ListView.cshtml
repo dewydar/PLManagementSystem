@@ -1,0 +1,141 @@
+﻿@model PaginationResponseModelV2
+<style>
+    .hand {
+        cursor: pointer;
+    }
+
+    .dropdown-menu1 {
+        box-shadow: 24px 50px 24px rgba(0, 0, 0, 0.175) !important;
+        width: 100%;
+    }
+</style>
+@{
+    int rowIndex = Model.FirstRowOnPage;
+    var tablelist = (List<ResponseUserDto>)Model.ReturnData;
+    var filtersVM = new UserFilterVM();
+    var ControllerName = nameof(UserController).Replace("Controller", string.Empty);
+
+    if (ViewData["filters"] != null)
+    {
+        filtersVM = ViewData["filters"] as UserFilterVM;
+    }
+
+    var FilterQueryStringDictionary = new Dictionary<string, string>();
+    if (ViewData["QueryStringDictionary"] != null)
+    {
+        FilterQueryStringDictionary = new Dictionary<string, string>(ViewData["QueryStringDictionary"] as Dictionary<string, string>);
+    }
+
+
+}
+
+<div id="view-all">
+    @await Html.PartialAsync("Filters", filtersVM)
+
+    @if (Model.ReturnData != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+
+                <partial name="_SortSelect" model="@Model" />
+
+                <div class="box box-primary">
+                    <div class="box-body no-padding">
+                        <!-- Dropdown for selecting the column -->
+                        <table id="MyTable" class="table table-bordered table-striped" style=" width: 100%;">
+                            <thead>
+                                <tr class="trCenter">
+                                    <th class="fit">#</th>
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th class="fit tdCenter">
+                                        User Name
+                                    </th>
+                                    <th class="fit tdCenter">
+                                        Is Admin
+                                    </th>
+                                    <th class="fit tdCenter">
+                                        Is Active
+                                    </th>
+                                    <th class="fit tdCenter">
+                                        Password
+                                    </th>
+                                    <th class="fit tdCenter"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in tablelist)
+                                {
+                                    var urlEdit = Url.Action(nameof(UserController.Edit), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}";
+                                    var urlDelete = Url.Action(nameof(UserController.Delete), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}";
+                                    <tr data-id="@item.Id" data-ordernumber="@item.Id" data-PageIndex="@Model.PageIndex" data-Name="@item.Name" class="trCenter text-wrap">
+
+                                        <td class="fit  ui-state-disabled"> @(rowIndex++)</td>
+                                        <td class="  ui-state-disabled">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td class="  ui-state-disabled">
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+                                        <td class="fit tdCenter ui-state-disabled">
+
+                                            @Html.DisplayFor(modelItem => item.IsAdmin)
+                                        </td>
+                                        <td class="fit tdCenter ui-state-disabled">
+
+                                            @Html.DisplayFor(modelItem => item.IsActive)
+                                        </td>
+                                        <td class="fit tdCenter ui-state-disabled">
+                                            @if (!item.IsActive)
+                                            {
+                                                @Html.DisplayFor(modelItem => item.Password)
+                                            }
+                                            else
+                                            {
+                                                <span>------</span>
+                                            }
+                                        </td>
+
+                                        <td class="fit ui-state-disabled" style="text-align: right !important;">
+                                            <div class="btn-group pull-right">
+                                                <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="hand" onclick='return jQueryAjaxDeleteUrl("@urlDelete")'>
+                                                            <span class="fa fa-trash"></span> Delete
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="hand" onclick='return showInPopup("@urlEdit"," Edit Record")'>
+                                                            <span class="fa fa-edit"></span> Edit
+                                                        </a>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer clearfix" style="border-top:0">
+                        <partial name="_ListPager" model="@Model" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="tdCenter">
+            <br>
+            <br>
+            <br>
+            <h3>--- No Data Available --- </h3>
+        </div>
+    }
+</div>

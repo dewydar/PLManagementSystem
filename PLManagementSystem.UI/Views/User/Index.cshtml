@@ -1,0 +1,40 @@
+﻿@model PaginationResponseModelV2
+@{
+    var FilterQueryStringDictionary = new Dictionary<string, string>();
+    if (ViewData["filterDictonary"] != null)
+    {
+        FilterQueryStringDictionary = new Dictionary<string, string>(ViewData["filterDictonary"] as Dictionary<string, string>);
+    }
+    var ControllerName = nameof(UserController).Replace("Controller", string.Empty);
+    var CreateUrl = @Url.Action(nameof(UserController.Create), ControllerName, null, Context.Request.Scheme);
+    var GetListViewAsJsonUrl = @Url.Action(action: nameof(UserController.GetListViewAsJson), controller: ControllerName, FilterQueryStringDictionary);
+    var filterAny= FilterQueryStringDictionary.Any();
+}
+<input type="hidden" id="filterAny" value="@filterAny" />
+<input type="hidden" id="GetListViewAsJsonUrl" value="@GetListViewAsJsonUrl" />
+<input type="hidden" id="FilterQueryStringDictionaryCount" value="@FilterQueryStringDictionary.Count()" />
+<input type="hidden" id="TotalItemCount" value="@Model.TotalItemCount" />
+<section class="content-header">
+    <h1>
+        Users
+        <span class="pull-right">
+
+            <a onclick="showInPopup('@CreateUrl','Add')" class="btn btn-primary">Add &nbsp; <i class="fa fa-plus"></i> </a>
+
+        </span>
+    </h1>
+
+</section>
+
+<section class="content container-fluid">
+
+
+    @await Html.PartialAsync("ListView", Model)
+
+
+</section>
+
+@section Script {
+}
+
+

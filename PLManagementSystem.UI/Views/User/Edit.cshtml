@@ -1,0 +1,57 @@
+﻿@using PLManagementSystem.Helpers.PassHelper
+@model RequestUserDto
+@{
+    string action = nameof(UserController.Edit);
+
+    var QueryStringDictionary = new Dictionary<string, string>();
+    if (ViewData["QueryStringDictionary"] != null)
+    {
+        QueryStringDictionary = new Dictionary<string, string>(ViewData["QueryStringDictionary"] as Dictionary<string, string>);
+    }
+
+    var CurrentPageIndex = ViewData["PageIndex"];
+}
+
+<form id="MyModalForm" asp-route-id="@Model.Id" asp-all-route-data="@QueryStringDictionary" asp-route-PageIndex="@CurrentPageIndex"
+      asp-action="@action" onsubmit="return jQueryAjaxPost(this);">
+    <div class="box-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="IsActive" />
+        <input type="hidden" asp-for="IsDeleted" />
+        <div style="display:none" class="callout callout-danger ErrorDiv"></div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12 d-flex">
+                <div class="form-group mb-3">
+                    <label>Name</label>
+                    <input type="text" asp-for="Name" class="form-control" />
+                    <span class="validation" asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 d-flex">
+                <div class="form-group mb-3">
+                    <label>User Name</label>
+                    <input type="text" asp-for="UserName" class="form-control" />
+                    <span class="validation" asp-validation-for="UserName"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 d-flex">
+                <div class="form-group mb-3">
+                    <label>Password</label>
+                    <input type="text" asp-for="Password" value="@WebUiUtility.Decrypt(Model.Password)" class="form-control" />
+                    <span class="validation" asp-validation-for="Password"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 d-flex">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" asp-for="IsAdmin" />
+                        <span class="text-bold">IsAdmin</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
