@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
 	SortVM SortModel = new SortVM();
 	if (ViewData["SortModel"] != null)
 	{
@@ -12,9 +11,9 @@
 }
 
 <div>
-	<div class="form-inline" style="margin-bottom:10px;">
-		<label for="columnDropdown">Sort by : </label>
-		<select id="ColumnDropdown" class="form-control ColumnDropdown" onchange="SortTable()">
+	<div class="form-inline">
+		<label for="columnDropdown" style="margin-right: 0.25rem;">Sort by : </label>
+		<select id="ColumnDropdown" class="form-control ColumnDropdown" onchange="SortTable()" style="margin-right: 0.25rem;">
 			@foreach (var col in SortModel.Columns.Where(a=>a.IsSortable))
 			{
 				if (col.ColumnName == sortColumn)

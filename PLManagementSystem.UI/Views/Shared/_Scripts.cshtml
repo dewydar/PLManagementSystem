@@ -1,141 +1,48 @@
-﻿<script data-pace-options='{"ajax":false,"restartOnRequestAfter":false,"startOnPageLoad":false}' src="/staticfiles/Template/plugins/pace/pace.min.js"></script>
-
-<script src="~/StaticFiles/Template/bower_components/jquery/dist/jquery.min.js"></script>
-
-<script src="~/StaticFiles/Template/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-
-<script src="~/StaticFiles/Template/dist/js/Adminlte.unmin.js"></script>
-<script src="~/StaticFiles/Template/dist/js/FayedAdminLteExtend.js?37"></script>
-
-
-<script src="~/StaticFiles/Template/bower_components/jquery-ui/jquery-ui.min.js"></script>
-
-<script src="~/StaticFiles/Template/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="~/StaticFiles/Template/bower_components/fastclick/lib/fastclick.js"></script>
-
-<!-- SweetAlert2 -->
-<script src="~/staticfiles/shared/sweetalert2/js/sweetalert2.min.js"></script>
-
-
-<script src="~/StaticFiles/Template/bower_components/moment/min/moment.min.js"></script>
-<script src="~/StaticFiles/Template/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<script src="~/StaticFiles/Template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="~/StaticFiles/Template/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-
-<!-- sumoselect -->
-<script src="~/lib/jquery-sumoselect/js/jquery.sumoselect.js"></script>
-<script src="~/lib/jquery-sumoselect/js/jquery.sumoselect.min.js"></script>
-
-
-
-<script src="~/StaticFiles/Template/bower_components/select2/dist/js/select2.full.min.js"></script>
-
-<script src="~/StaticFiles/Template/bower_components/moment/moment.js"></script>
-<script src="~/StaticFiles/Template/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-
-<!-- Jquery validation -->
+﻿@*     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+<script src="~/js/site.js" asp-append-version="true"></script> <!-- jQuery -->
+<script src="~/Adminlte/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="~/Adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-<!-- Htmx -->
-<script src="~/js/htmx.min.js"></script>
-
-<!-- Toastr -->
-<script src="~/staticfiles/shared/toastr/js/toastr.min.js"></script>
-
-<!-- Sort order No -->
-<script src="~/lib/jqueryui/jquery-ui.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/Adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/adminlte/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="~/Adminlte/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="~/Adminlte/plugins/moment/moment.min.js"></script>
+<script src="~/Adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/Adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="~/Adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="~/Adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/Adminlte/dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+@* <script src="~/Adminlte/dist/js/pages/dashboard.js"></script> *@
 <script src="~/js/sortable.js"></script>
-
-<!-- data table Localization -->
-<script src="~/internallib/localization/js/translation.js"></script>
-<script src="~/internallib/localization/js/datatablelocalization.js"></script>
-
-
-<!-- tree table -->
-<script src="~/lib/jquery-tree-table/js/tree-table.js"></script>
-
-<!-- nera data table -->
-<script src="~/internallib/nera-datatable/js/nera-datatable.js"></script>
-<!--Custom Field-->
-<script src="~/internallib/customfield/customfieldselect.js"></script>
-
-<!-- Chart -->
-<script src="~/staticfiles/Template/bower_components/chart.js/chart.min.js"></script>
-
-<script src="~/js/site.js"></script>
-
-<script src="~/StaticFiles/PLManagementSystem/ViewsFiels/js/ModalHelper.js"></script>
-<script src="~/StaticFiles/PLManagementSystem/ViewsFiels/js/TableSortHelper.js"></script>
-<script>
-
-    $(document).ready(function () {
-        console.log("Ready.." + new Date());
-        setTimeout(function () {
-            console.log("setTimeout.." + new Date);
-            if (!$('body').hasClass('loaded')) {
-                $('body').addClass('loaded');
-            }
-            $('.loader').fadeOut(400);
-        }, 10000); 
-    });
-
-    $(window).on('load', function () {
-        console.log("Loaded.." + new Date())
-        $('body').addClass('loaded');
-        $('.loader').fadeOut(400);
-    });
-
-</script>
-<script>
-    $(document).ajaxStart(function () {
-        Pace.restart(); 
-    });
-    $(document).ajaxStop(function () {
-       Pace.stop();
-    });
-</script>
-@if (!string.IsNullOrWhiteSpace((string)TempData["AddMessage"]) && (bool)TempData["IsSucceeded"])
+<script src="~/js/logoonsidebarcollapse.js"></script>
+<script src="~/staticfiles/PLManagementSystem/viewsfiels/js/modalhelper.js"></script>
+<script src="~/staticfiles/PLManagementSystem/viewsfiels/js/tablesorthelper.js"></script>
+<script src="~/js/activenavlink.js"></script>
+<script src="~/staticfiles/shared/toastr/js/toastr.min.js"></script>
+<script src="~/lib/select2/select2.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/staticfiles/shared/sweetalert2/sweetalert2.all.min.js"></script>
+@if (!string.IsNullOrWhiteSpace((string)TempData["Message"]) && (bool)TempData["IsSucceeded"])
 {
-    string Message = (string)TempData["AddMessage"];
+    string Message = (string)TempData["Message"];
     <script>
         toastr.success('@Message')
     </script>
 }
-@if (!string.IsNullOrWhiteSpace((string)TempData["AddMessage"]) && !(bool)TempData["IsSucceeded"])
+@if (!string.IsNullOrWhiteSpace((string)TempData["Message"]) && !(bool)TempData["IsSucceeded"])
 {
-    string Message = (string)TempData["AddMessage"];
-    <script>
-        toastr.error('@Message')
-    </script>
-}
-@if (!string.IsNullOrWhiteSpace((string)TempData["EditMessage"]) && (bool)TempData["IsSucceeded"])
-{
-    string Message = (string)TempData["EditMessage"];
-    <script>
-        toastr.success('@Message')
-    </script>
-}
-@if (!string.IsNullOrWhiteSpace((string)TempData["EditMessage"]) && !(bool)TempData["IsSucceeded"])
-{
-    string Message = (string)TempData["EditMessage"];
-    <script>
-        toastr.error('@Message')
-    </script>
-}
-@if (!string.IsNullOrWhiteSpace((string)TempData["DeleteMessage"]) && (bool)TempData["IsSucceeded"])
-{
-    string Message = (string)TempData["DeleteMessage"];
-    <script>
-        toastr.success('@Message')
-    </script>
-}
-@if (!string.IsNullOrWhiteSpace((string)TempData["DeleteMessage"]) && !(bool)TempData["IsSucceeded"])
-{
-    string Message = (string)TempData["DeleteMessage"];
+    string Message = (string)TempData["Message"];
     <script>
         toastr.error('@Message')
     </script>
