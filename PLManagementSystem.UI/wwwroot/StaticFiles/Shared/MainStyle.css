@@ -1,0 +1,114 @@
+﻿.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+div.dt-button-collection {
+    background-color: #6c757d;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+.nav-sidebar .nav-link p {
+    display: inline-block !important;
+}
+
+.nav-link p {
+    width: 148px !important;
+    height: 22px !important;
+    text-overflow: ellipsis; /* enables ellipsis */
+    white-space: nowrap !important; /* keeps the text in a single line */
+    overflow: hidden; /* keeps the element from overflowing its parent */
+}
+
+.ellipsis {
+}
+
+.dt-button.buttons-columnVisibility {
+    text-align: left;
+}
+
+    .dt-button.buttons-columnVisibility:before {
+        font-family: "FontAwesome";
+        content: "\f096";
+        display: inline-block;
+        padding-right: 3px;
+    }
+
+    .dt-button.buttons-columnVisibility.active:before {
+        font-family: "FontAwesome";
+        content: "\f046";
+        display: inline-block;
+        padding-right: 3px;
+    }
+
+.dark-mode a {
+    color: #3f6791;
+    border-color: #3f6791;
+    box-shadow: none;
+}
+
+/*  Service Details background */
+.serviceDetails-background {
+    background-color: white;
+}
+/*  Service Details background */
+.dark-mode .serviceDetails-background {
+    background-color: #343a40;
+}
+.dark-mode .assetDetails-tbody {
+    background-color: #343a40;
+}
