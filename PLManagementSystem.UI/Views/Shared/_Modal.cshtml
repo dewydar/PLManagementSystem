@@ -1,5 +1,16 @@
-﻿<div id="form-modal" class="modal fade bd-example-modal-xl" data-backdrop="static" role="dialog">
-    <div class="modal-dialog ">
+﻿<style>
+    .dark-mode .modal-footer {
+        justify-content: center;
+        background-color: #2f3439;
+    }
+
+    .modal-footer {
+        justify-content: center;
+        background-color: lightgrey;
+    }
+</style>
+<div id="form-modal" class="modal fade bd-example-modal-xl" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #3C8DBC; color: white; font-weight: bold;">
                 <h4 class="modal-title"></h4>
@@ -9,10 +20,11 @@
             </div>
             <div class="modal-body">
             </div>
-            <div class="modal-footer" style="justify-content:center; background-color: lightgrey;">
+            <div class="modal-footer">
                 <button class="btn btn-primary" type="submit" form="MyModalForm">Save&nbsp &nbsp<i class="fa fa-save" aria-hidden="true"></i></button>
+
                 <a href="javaScript:void(0)" onclick="return HideModel();" class="btn" style="background-color: #3c8dbc; color: white;">
-                    <i class="fa fa-ban" aria-hidden="true"></i> Cancel
+                    <i class="fa fa-ban" aria-hidden="true"></i> Close
                 </a>
             </div>
         </div>
