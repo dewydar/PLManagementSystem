@@ -1,0 +1,31 @@
+﻿.sb-div {
+    height: 3.5rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    display: flex;
+}
+
+[class*=sidebar-dark] .sb-div {
+    border-bottom: 1px solid #4f5962;
+}
+[class*=sidebar-light] .sb-div {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.neraLogo-img {
+    opacity: .8;
+    height: 2rem;
+}
+.neraLogo-textDiv {
+    margin-left: 0.5rem;
+    padding-top: 0.5rem;
+}
+.nv-div {
+    display: none;
+    height: 1.5rem;
+    padding: 0.3rem 0rem;
+}
+
+
+
+
