@@ -34,13 +34,14 @@
 
     @if (Model.ReturnData != null)
     {
-        <div class="row">
-            <div class="col-md-12">
+        <div class="card">
+            <div class="card-dialog">
+                <div class="card-content">
+                    <div class="card-header bg-transparent">
+                        <partial name="_SortSelect" model="@Model" />
+                    </div>
 
-                <partial name="_SortSelect" model="@Model" />
-
-                <div class="box box-primary">
-                    <div class="box-body no-padding">
+                    <div class="card-body p-0">
                         <!-- Dropdown for selecting the column -->
                         <table id="MyTable" class="table table-bordered table-striped" style=" width: 100%;">
                             <thead>
@@ -98,23 +99,17 @@
                                                 <span>------</span>
                                             }
                                         </td>
-
                                         <td class="fit ui-state-disabled" style="text-align: right !important;">
-                                            <div class="btn-group pull-right">
-                                                <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a class="hand" onclick='return jQueryAjaxDeleteUrl("@urlDelete")'>
-                                                            <span class="fa fa-trash"></span> Delete
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="hand" onclick='return showInPopup("@urlEdit"," Edit Record")'>
-                                                            <span class="fa fa-edit"></span> Edit
-                                                        </a>
-
-                                                    </li>
-                                                </ul>
+                                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <i class="fa fa-ellipsis-h"></i> <span class="caret"></span>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a class="hand dropdown-item" onclick='return jQueryAjaxDeleteUrl("@urlDelete")'>
+                                                    <span class="fa fa-trash"></span> Delete
+                                                </a>
+                                                <a class="hand dropdown-item" onclick='return showInPopup("@urlEdit","Edit")'>
+                                                    <span class="fa fa-edit"></span> Edit
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -122,7 +117,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="box-footer clearfix" style="border-top:0">
+                    <div class="card-footer" style="padding: 0.5rem 0rem 0rem 1.25rem;">
                         <partial name="_ListPager" model="@Model" />
                     </div>
                 </div>
@@ -131,11 +126,12 @@
     }
     else
     {
-        <div class="tdCenter">
-            <br>
-            <br>
-            <br>
+        <div class="row">
+        <div class="col-sm-12">
+        <div class="d-flex justify-content-center mt-4">
             <h3>--- No Data Available --- </h3>
+        </div>
+        </div>
         </div>
     }
 </div>

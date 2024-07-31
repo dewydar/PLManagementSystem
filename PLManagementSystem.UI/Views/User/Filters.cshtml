@@ -1,27 +1,36 @@
 ﻿@model UserFilterVM
 
 <form asp-action="GetListFromFilters">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <label>Name</label>
-                    <input asp-for="name" type="text" value="@Model.name" class="form-control" placeholder="Search by name">
+    <div class="card">
+        <div class="card-dialog">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <label>Name</label>
+                            <input asp-for="name" type="text" value="@Model.name" class="form-control" placeholder="Search by name">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Active</label>
+                            <select asp-for="isActive" class="form-control select2">
+                                <option>-- Select --</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 col-sm-12">
-                    <label>Active</label>
-                    <select asp-for="isActive" class="form-control select2">
-                        <option>-- Select --</option>
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
+                <div class="card-footer">
+                    <div class="row justify-content-center">
+                        <div class="col-md-2">
+                            <a asp-action="Index" class="btn btn-default"><i class="fa-solid fa-rotate-left"></i> Clear</a>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="SearchBtn" type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="panel-footer tdCenter">
-            <a asp-action="Index" class="btn btn-default">Clear <span style="padding-left: 5px;"><i class="fa fa-refresh"></i></span></a>
-            <button id="SearchBtn" type="submit"  class="btn btn-primary">Search <span style="padding-left: 5px;"><i class="fa fa-search"></i></span></button>
         </div>
     </div>
 </form>
