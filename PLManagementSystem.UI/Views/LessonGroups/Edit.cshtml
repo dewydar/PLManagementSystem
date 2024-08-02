@@ -1,0 +1,60 @@
+﻿@using PLManagementSystem.Helpers.PassHelper
+@model RequestLessonGroupsDto
+@{
+    var QueryStringDictionary = new Dictionary<string, string>();
+    if (ViewData["QueryStringDictionary"] != null)
+    {
+        QueryStringDictionary = new Dictionary<string, string>(ViewData["QueryStringDictionary"] as Dictionary<string, string>);
+    }
+    var DayesList = ViewBag.DayesList;
+    var ClassesList = ViewBag.ClassesList;
+    var CurrentPageIndex = ViewData["PageIndex"];
+}
+
+<form id="MyModalForm" asp-route-id="@Model.Id" asp-all-route-data="@QueryStringDictionary" asp-route-PageIndex="@CurrentPageIndex"
+      asp-action="@nameof(LessonGroupsController.Edit)" onsubmit="return jQueryAjaxPost(this);">
+    <div class="box-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="IsDeleted" />
+        <input type="hidden" asp-for="OrderNo" />
+        <div style="display:none" class="callout callout-danger ErrorDiv"></div>
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group mb-3">
+                    <label>Name</label>
+                    <input type="text" asp-for="Name" class="form-control" autocomplete="off" />
+                    <span class="validation" asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <label>Class</label>
+                <select asp-for="ClassId" asp-items="ClassesList" class="form-control select2">
+                    <option>-- Select --</option>
+                </select>
+                <span class="validation" asp-validation-for="ClassId"></span>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <label>Price</label>
+                <input asp-for="Price" class="form-control" />
+                <span class="validation" asp-validation-for="Price"></span>
+            </div>
+           @*  <div class="col-md-4 col-sm-12">
+                <label>Day</label>
+                <select asp-for="DayId" asp-items="DayesList" class="form-control select2">
+                    <option>-- Select --</option>
+                </select>
+                <span class="validation" asp-validation-for="DayId"></span>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <label>Time</label>
+                <input asp-for="Time" class="form-control" type="time"/>
+                <span class="validation" asp-validation-for="Time"></span>
+            </div> *@
+           
+            
+        </div>
+    </div>
+</form>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

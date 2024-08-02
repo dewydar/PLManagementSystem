@@ -97,6 +97,13 @@
                                 <p class="ellipsis">Class</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-action="@nameof(LessonGroupsController.Index)" class="nav-link"
+                               asp-controller="@nameof(LessonGroupsController).Replace("Controller",string.Empty)">
+                                <i class="fa-solid fa-o nav-icon"></i>
+                                <p class="ellipsis">Lesson Groups</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

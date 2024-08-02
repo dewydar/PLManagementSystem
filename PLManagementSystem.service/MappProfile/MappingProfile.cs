@@ -27,6 +27,12 @@ namespace PLManagementSystem.Service.MappProfile
             CreateMap<Class, RequestClassDto>().ReverseMap();
             CreateMap<Class, ResponseClassDto>().ReverseMap();
             #endregion
+            #region Lesson Groups
+            CreateMap<LessonGroups, RequestLessonGroupsDto>().ReverseMap();
+            CreateMap<ResponseLessonGroupsDto,LessonGroups>().ReverseMap()
+                .ForMember(dest => dest.ClassName, opts => opts.MapFrom(src => src.Classes.Name))
+                .ReverseMap();
+            #endregion
         }
     }
 }

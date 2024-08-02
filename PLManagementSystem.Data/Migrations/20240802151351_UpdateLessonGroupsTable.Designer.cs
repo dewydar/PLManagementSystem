@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PLManagementSystem.Data.Entites;
 
@@ -11,9 +12,11 @@ using PLManagementSystem.Data.Entites;
 namespace PLManagementSystem.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240802151351_UpdateLessonGroupsTable")]
+    partial class UpdateLessonGroupsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,6 +218,9 @@ namespace PLManagementSystem.Data.Migrations
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
 
+                    b.Property<int>("DayId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -223,40 +229,19 @@ namespace PLManagementSystem.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("OrderNo")
-                        .HasColumnType("int");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClassId");
-
-                    b.ToTable("LessonGroups");
-                });
-
-            modelBuilder.Entity("PLManagementSystem.Core.Entities.LessonGroupsDays", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DayId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LessonGroupId")
-                        .HasColumnType("int");
 
                     b.Property<TimeOnly>("Time")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClassId");
+
                     b.HasIndex("DayId");
 
-                    b.HasIndex("LessonGroupId");
-
-                    b.ToTable("LessonGroupsDays");
+                    b.ToTable("LessonGroups");
                 });
 
             modelBuilder.Entity("PLManagementSystem.Core.Entities.User", b =>
@@ -301,31 +286,15 @@ namespace PLManagementSystem.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Classes");
-                });
-
-            modelBuilder.Entity("PLManagementSystem.Core.Entities.LessonGroupsDays", b =>
-                {
                     b.HasOne("PLManagementSystem.Core.Entities.Day", "Dayes")
                         .WithMany()
                         .HasForeignKey("DayId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PLManagementSystem.Core.Entities.LessonGroups", "LessonGroup")
-                        .WithMany("LessonGroupsDays")
-                        .HasForeignKey("LessonGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Classes");
 
                     b.Navigation("Dayes");
-
-                    b.Navigation("LessonGroup");
-                });
-
-            modelBuilder.Entity("PLManagementSystem.Core.Entities.LessonGroups", b =>
-                {
-                    b.Navigation("LessonGroupsDays");
                 });
 #pragma warning restore 612, 618
         }

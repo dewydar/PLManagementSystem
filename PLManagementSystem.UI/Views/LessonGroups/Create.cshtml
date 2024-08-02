@@ -1,0 +1,56 @@
+﻿@model RequestLessonGroupsDto
+@{
+    var DayesList = ViewBag.DayesList;
+    var ClassesList = ViewBag.ClassesList;
+}
+<form id="MyModalForm" asp-action="@nameof(ClassController.Create)" onsubmit="return jQueryAjaxPost(this);">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="display:none" class="callout callout-danger ErrorDiv"></div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group mb-3">
+                        <label>Name</label>
+                        <input type="text" asp-for="Name" class="form-control" autocomplete="off"/>
+                        <span class="validation" asp-validation-for="Name"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <label>Class</label>
+                    <select asp-for="ClassId" asp-items="ClassesList" class="form-control select2">
+                        <option value="">-- Select --</option>
+                    </select>
+                    <span class="validation" asp-validation-for="ClassId"></span>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group mb-3">
+                        <label>Price</label>
+                        <input asp-for="Price" class="form-control" />
+                        <span class="validation" asp-validation-for="Price"></span>
+                    </div>
+                </div>
+                @* <div class="col-md-4 col-sm-12">
+                    <label>Day</label>
+                    <select asp-for="DayId" asp-items="DayesList" class="form-control select2">
+                        <option value="">-- Select --</option>
+                    </select>
+                    <span class="validation" asp-validation-for="DayId"></span>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group mb-3">
+                        <label>Time</label>
+                        <input asp-for="Time" class="form-control" type="time"/>
+                        <span class="validation" asp-validation-for="Time"></span>
+                    </div>
+                </div> *@
+
+
+            </div>
+        </div>
+
+    </div>
+
+</form>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

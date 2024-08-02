@@ -49,6 +49,14 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="Views\LessonGroups\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\LessonGroups\ListView.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\StaticFiles\Shared\jquery-validation\dist\additional-methods.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -79,6 +87,10 @@
     <_ContentIncludedByDefault Remove="Views\Day\Create.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Day\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Day\Filters.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\LessonGroups\ChangePosition.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\LessonGroups\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\LessonGroups\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\LessonGroups\Filters.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,6 +99,22 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Day\Filters.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\LessonGroups\ChangePosition.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\LessonGroups\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\LessonGroups\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\LessonGroups\Filters.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,25 @@
+﻿@model UpdateOrderDto
+@{
+    var QueryStringDictionary = new Dictionary<string, string>();
+    if (ViewData["QueryStringDictionary"] != null)
+    {
+        QueryStringDictionary = new Dictionary<string, string>(ViewData["QueryStringDictionary"] as Dictionary<string, string>);
+    }
+    var CurrentPageIndex = ViewData["PageIndex"];
+}
+<form id="MyModalForm" asp-all-route-data="@QueryStringDictionary" asp-route-id="@Model.Id" asp-route-PageIndex="@CurrentPageIndex"
+      asp-action="@nameof(LessonGroupsController.ChangePosition)" onsubmit="return jQueryAjaxPost(this);">
+    <div class="modal-body p-3">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="MaxOrderNo" />
+        <div style="display:none" class="callout callout-danger ErrorDiv"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="control-label">Enter a value between 1 and @Model.MaxOrderNo</label>
+                    <input type="number" asp-for="OrderNo" class="form-control" min="1" max="@Model.MaxOrderNo" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
