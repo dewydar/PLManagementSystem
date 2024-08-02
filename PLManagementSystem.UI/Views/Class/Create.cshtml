@@ -1,0 +1,30 @@
+﻿@model RequestClassDto
+
+<form id="MyModalForm" asp-action="@nameof(ClassController.Create)" onsubmit="return jQueryAjaxPost(this);">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="display:none" class="callout callout-danger ErrorDiv"></div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group mb-3">
+                        <label>Name</label>
+                        <input type="text" asp-for="Name" class="form-control" />
+                        <span class="validation" asp-validation-for="Name"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group mb-3">
+                        <label>Short Name</label>
+                        <input type="text" asp-for="ShortName" class="form-control" />
+                        <span class="validation" asp-validation-for="ShortName"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

@@ -1,0 +1,29 @@
+﻿@model PaginationResponseModelV2
+@{
+    var FilterQueryStringDictionary = new Dictionary<string, string>();
+    if (ViewData["filterDictonary"] != null)
+    {
+        FilterQueryStringDictionary = new Dictionary<string, string>(ViewData["filterDictonary"] as Dictionary<string, string>);
+    }
+    var ControllerName = nameof(DayController).Replace("Controller", string.Empty);
+    var CreateUrl = @Url.Action(nameof(DayController.Create), ControllerName, null, Context.Request.Scheme);
+    var GetListViewAsJsonUrl = @Url.Action(action: nameof(DayController.GetListViewAsJson), controller: ControllerName, FilterQueryStringDictionary);
+    var filterAny = FilterQueryStringDictionary.Any();
+}
+<input type="hidden" id="filterAny" value="@filterAny" />
+<input type="hidden" id="GetListViewAsJsonUrl" value="@GetListViewAsJsonUrl" />
+<input type="hidden" id="FilterQueryStringDictionaryCount" value="@FilterQueryStringDictionary.Count()" />
+<input type="hidden" id="TotalItemCount" value="@Model.TotalItemCount" />
+<div class="nera-container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="text-dark">Days</h3>
+        </div>
+        <div class="col-md-6">
+            <span class="d-flex justify-content-end">
+                <a onclick="showInPopup('@CreateUrl','Add')" class="btn btn-primary">Add &nbsp; <i class="fa-solid fa-plus"></i> </a>
+            </span>
+        </div>
+    </div>
+    @await Html.PartialAsync("ListView", Model)
+</div>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PLManagementSystem.Core.Entities;
 using PLManagementSystem.Data.Extensions;
+using System.Text.RegularExpressions;
 
 namespace PLManagementSystem.Data.Entites
 {
@@ -23,11 +24,15 @@ namespace PLManagementSystem.Data.Entites
 
         }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Day> Dayes { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<LessonGroups> LessonGroups { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region Query filter
             // add filter to return data where is deleted false ===> IsDeletedQueryFilter
             modelBuilder.IsDeletedQueryFilter();
+            modelBuilder.Seed();
             #endregion
         }
         public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

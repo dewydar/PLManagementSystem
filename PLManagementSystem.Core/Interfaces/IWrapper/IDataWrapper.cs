@@ -12,6 +12,9 @@ namespace PLManagementSystem.Core.Interfaces.IWrapper
     {
         public IUnitOfWork UnitOfWork { get; }
         public IGenericRepository<User> UserRepository { get; }
+        public IGenericRepository<Day> DayRepository { get; }
+        public IGenericRepository<Class> ClassRepository { get; }
+        public IGenericRepository<LessonGroups> LessonGroupsRepository { get; }
 
     }
 }

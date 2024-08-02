@@ -14,6 +14,9 @@ namespace PLManagementSystem.Data.Wrapper
         private readonly IServiceProvider _serviceProvider;
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<User> _userRepository;
+        private IGenericRepository<Day> _dayRepository;
+        private IGenericRepository<Class> _classRepository;
+        private IGenericRepository<LessonGroups> _lessonGroupsRepository;
         public DataWrapper(AppDbContext context, IServiceProvider serviceProvider)
         {
             _context = context;
@@ -41,6 +44,42 @@ namespace PLManagementSystem.Data.Wrapper
                     _userRepository = new GenericRepository<User>(_context, logger);
                 }
                 return _userRepository;
+            }
+        }
+        public IGenericRepository<Day> DayRepository
+        {
+            get
+            {
+                if (_dayRepository == null)
+                {
+                    var logger = _serviceProvider.GetRequiredService<ILogger<GenericRepository<Day>>>();
+                    _dayRepository = new GenericRepository<Day>(_context, logger);
+                }
+                return _dayRepository;
+            }
+        }
+        public IGenericRepository<Class> ClassRepository
+        {
+            get
+            {
+                if (_classRepository == null)
+                {
+                    var logger = _serviceProvider.GetRequiredService<ILogger<GenericRepository<Class>>>();
+                    _classRepository = new GenericRepository<Class>(_context, logger);
+                }
+                return _classRepository;
+            }
+        }
+        public IGenericRepository<LessonGroups> LessonGroupsRepository
+        {
+            get
+            {
+                if (_lessonGroupsRepository == null)
+                {
+                    var logger = _serviceProvider.GetRequiredService<ILogger<GenericRepository<LessonGroups>>>();
+                    _lessonGroupsRepository = new GenericRepository<LessonGroups>(_context, logger);
+                }
+                return _lessonGroupsRepository;
             }
         }
     }

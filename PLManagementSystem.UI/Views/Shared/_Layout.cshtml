@@ -83,6 +83,20 @@
                                 <p class="ellipsis">Users</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-action="@nameof(DayController.Index)" class="nav-link"
+                               asp-controller="@nameof(DayController).Replace("Controller",string.Empty)">
+                                <i class="fa-solid fa-o nav-icon"></i>
+                                <p class="ellipsis">Dayes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="@nameof(ClassController.Index)" class="nav-link"
+                               asp-controller="@nameof(ClassController).Replace("Controller",string.Empty)">
+                                <i class="fa-solid fa-o nav-icon"></i>
+                                <p class="ellipsis">Class</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

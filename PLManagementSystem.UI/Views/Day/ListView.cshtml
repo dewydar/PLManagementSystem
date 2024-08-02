@@ -1,0 +1,103 @@
+﻿@model PaginationResponseModelV2
+<style>
+    .hand {
+        cursor: pointer;
+    }
+
+    .dropdown-menu1 {
+        box-shadow: 24px 50px 24px rgba(0, 0, 0, 0.175) !important;
+        width: 100%;
+    }
+</style>
+@{
+    int rowIndex = Model.FirstRowOnPage;
+    var tablelist = (List<ResponseDayDto>)Model.ReturnData;
+    var filtersVM = new DayFilterVM();
+    var ControllerName = nameof(DayController).Replace("Controller", string.Empty);
+
+    if (ViewData["filters"] != null)
+    {
+        filtersVM = ViewData["filters"] as DayFilterVM;
+    }
+
+    var FilterQueryStringDictionary = new Dictionary<string, string>();
+    if (ViewData["QueryStringDictionary"] != null)
+    {
+        FilterQueryStringDictionary = new Dictionary<string, string>(ViewData["QueryStringDictionary"] as Dictionary<string, string>);
+    }
+
+
+}
+
+<div id="view-all">
+    @await Html.PartialAsync("Filters", filtersVM)
+
+    @if (Model.ReturnData != null)
+    {
+        <div class="card">
+            <div class="card-dialog">
+                <div class="card-content">
+                    <div class="card-header bg-transparent">
+                        <partial name="_SortSelect" model="@Model" />
+                    </div>
+
+                    <div class="card-body p-0">
+                        <!-- Dropdown for selecting the column -->
+                        <table id="MyTable" class="table table-bordered table-striped" style=" width: 100%;">
+                            <thead>
+                                <tr class="trCenter">
+                                    <th class="fit">#</th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th class="fit tdCenter"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in tablelist)
+                                {
+                                    var urlEdit = Url.Action(nameof(DayController.Edit), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}";
+                                    var urlDelete = Url.Action(nameof(DayController.Delete), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}";
+                                    <tr data-id="@item.Id" data-ordernumber="@item.Id" data-PageIndex="@Model.PageIndex" data-Name="@item.Name" class="trCenter text-wrap">
+
+                                        <td class="fit  ui-state-disabled"> @(rowIndex++)</td>
+                                        <td class="  ui-state-disabled">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td class="fit ui-state-disabled" style="text-align: right !important;">
+                                            <a class="nav-link " data-toggle="dropdown" href="#">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a class="hand dropdown-item" onclick='return jQueryAjaxDeleteUrl("@urlDelete")'>
+                                                    <span class="fa fa-trash"></span> Delete
+                                                </a>
+                                                <a class="hand dropdown-item" onclick='return showInPopup("@urlEdit","Edit")'>
+                                                    <span class="fa fa-edit"></span> Edit
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer" style="padding: 0.5rem 0rem 0rem 1.25rem;">
+                        <partial name="_ListPager" model="@Model" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+        <div class="col-sm-12">
+        <div class="d-flex justify-content-center mt-4">
+            <h3>--- No Data Available --- </h3>
+        </div>
+        </div>
+        </div>
+    }
+</div>
