@@ -186,6 +186,20 @@ namespace PLManagementSystem.UI.Controllers
             return Json(new { isValid = true, html = viewFromCurrentController, message = message });
         }
         #endregion
+        #region Details
+        public async Task<IActionResult> Details(int id,int maxOrder, int PageIndex = -1)
+        {
+            ViewBag.PageIndex = PageIndex;
+            ViewBag.maxOrder = maxOrder;
+            var service = await _service.GetByIdAsNoTracking(id);
+            return View(service);
+        }
+        public async Task<IActionResult> MainInfo(int id)
+        {
+            var service = await _service.GetByIdAsNoTracking(id);
+            return PartialView(service);
+        }
+        #endregion
         #region Create
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -306,19 +320,24 @@ namespace PLManagementSystem.UI.Controllers
 
 
             var OpResult = await _service.Edit(RecordUpdated);
-            if (!OpResult.IsSucceeded)
-            {
-                //_notyfService.Warning(OpResult.ErrorMessage);
-                return Json(new
-                {
-                    isValid = false,
-                    html = RazorHelper.RenderRazorViewToString(this, "Edit", RecordUpdated),
-                    errorMessage = OpResult.Message
-                });
-            }
-            ModelState.Clear();
+            //if (!OpResult.IsSucceeded)
+            //{
+            //    //_notyfService.Warning(OpResult.ErrorMessage);
+            //    return Json(new
+            //    {
+            //        isSucceeded = false,
+            //       // html = RazorHelper.RenderRazorViewToString(this, "Edit", RecordUpdated),
+            //        errorMessage = OpResult.Message
+            //    });
+            //}
+            //ModelState.Clear();
             //_notyfService.Success("The record updated successfully");
-            return await GetListViewAsJson(PageIndex: PageIndex, message: OpResult.Message);
+            return Json(new
+            {
+                isSucceeded = OpResult.IsSucceeded,
+                // html = RazorHelper.RenderRazorViewToString(this, "Edit", RecordUpdated),
+                message = OpResult.Message
+            });
         }
         #endregion
         #region Change Position
@@ -382,18 +401,24 @@ namespace PLManagementSystem.UI.Controllers
             RecordUpdated.Id = id;
             ResponseResult OpResult = await _service.UpdateOrderAsync(id, RecordUpdated);
 
-            if (!OpResult.IsSucceeded)
-            {
-                return Json(new
-                {
-                    isValid = false,
-                    html = RazorHelper.RenderRazorViewToString(this, "Edit", RecordUpdated),
-                    errorMessage = OpResult.Message
-                });
-            }
+            //if (!OpResult.IsSucceeded)
+            //{
+            //    return Json(new
+            //    {
+            //        isValid = false,
+            //        html = RazorHelper.RenderRazorViewToString(this, "Edit", RecordUpdated),
+            //        errorMessage = OpResult.Message
+            //    });
+            //}
 
             ModelState.Clear();
-            return await GetListViewAsJson(PageIndex: PageIndex, message: OpResult.Message);
+            return Json(new
+            {
+                isSucceeded = OpResult.IsSucceeded,
+                // html = RazorHelper.RenderRazorViewToString(this, "Edit", RecordUpdated),
+                message = OpResult.Message
+            });
+            //return await GetListViewAsJson(PageIndex: PageIndex, message: OpResult.Message);
         }
         #endregion
         #region Delete
@@ -417,6 +442,21 @@ namespace PLManagementSystem.UI.Controllers
 
 
             return await GetListViewAsJson(PageIndex: PageIndex, message: OpResult.Message);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id,int maxOrder, int PageIndex = -1)
+        {
+            var OpResult = await _service.SoftDelete(id);
+            TempData["Message"] = OpResult.Message;
+            TempData["IsSucceeded"] = OpResult.IsSucceeded;
+            if (OpResult.IsSucceeded)
+            {
+                return RedirectToAction(nameof(Index), new { PageIndex = PageIndex });
+            }
+            else
+            {
+                return RedirectToAction(nameof(Details), new { id = id, maxOrder= maxOrder, PageIndex = PageIndex });
+            }
         }
         #endregion
     }

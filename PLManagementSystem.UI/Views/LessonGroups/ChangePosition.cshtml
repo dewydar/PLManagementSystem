@@ -7,9 +7,12 @@
     }
     var CurrentPageIndex = ViewData["PageIndex"];
 }
-<form id="MyModalForm" asp-all-route-data="@QueryStringDictionary" asp-route-id="@Model.Id" asp-route-PageIndex="@CurrentPageIndex"
-      asp-action="@nameof(LessonGroupsController.ChangePosition)" onsubmit="return jQueryAjaxPost(this);">
+<form asp-controller="@nameof(LessonGroupsController).Replace("Controller",string.Empty)" asp-action="@nameof(LessonGroupsController.ChangePosition)"
+      asp-route-id="@Model.Id" asp-route-PageIndex="@CurrentPageIndex"
+      data-ajax-method="post" data-ajax="true" id="MyModalForm"
+      data-ajax-failure="OnFailure" data-ajax-success="OnSuccess" data-ajax-begin="OnBegin">
     <div class="modal-body p-3">
+        <input type="hidden" id="formType" value="edit" />
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="MaxOrderNo" />
         <div style="display:none" class="callout callout-danger ErrorDiv"></div>

@@ -1,0 +1,119 @@
+﻿@model ResponseLessonGroupsDto
+@{
+    int PageIndex = ViewBag.PageIndex;
+    int maxOrder = ViewBag.maxOrder;
+    string controller = nameof(LessonGroupsController).Replace("Controller", string.Empty);
+    string indexAction = nameof(LessonGroupsController.Index);
+    string deleteAction = nameof(LessonGroupsController.Delete);
+    string editAction = nameof(LessonGroupsController.Edit);
+    string changePositionAction = nameof(LessonGroupsController.ChangePosition);
+    string loadMainInfoAction = Url.Action(nameof(LessonGroupsController.MainInfo), controller);
+}
+<input type="hidden" value="@loadMainInfoAction" id="loadMainInfoAction" />
+<input type="hidden" id="deleteComponentAction" confirmButtonTextMSG="Delete" textDeleteMSG="Yes, delete group." titleDeleteMSG="Yes, delete group." />
+<input type="hidden" id="editTemplateAction" value="@editAction" errorMSG="Error" titleTXT="edit" />
+<input type="hidden" id="changePositionAction" value="@changePositionAction" errorMSG="Error" titleTXT="Change Position" />
+<div class="row justify-content-between">
+    <div class="col-sm-12">
+        <div class="card breadcrumb-header justify-content-between" id="Header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 d-flex">
+                    <ol class="breadcrumb details-background" style="margin-bottom:0px;">
+                        <li class="breadcrumb-item"><a href="/@controller/@indexAction/@PageIndex">Lesson Groups</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Details</li>
+                    </ol>
+
+                </div>
+                <div class="col-md-6 col-sm-12 d-flex justify-content-end"
+                     style="margin-top: 0.5rem; margin-bottom: 0.5rem; margin-left: -0.75rem;">
+
+                    <a class="btn btn-primary" onclick='return edit(@Model.Id)' href='javascript:void(0)'><i class='fa-solid fa-file-pen' style='max-width:2rem;'></i></a>
+                    <a class="btn btn-primary mr-2 ml-2" onclick='return changePosition(@Model.Id,@Model.OrderNo,@maxOrder,@PageIndex)' href='javascript:void(0)'><i class='fa-solid fa-arrows-alt' style='max-width:2rem;'></i></a>
+
+                    <form asp-controller="@controller" asp-action="@deleteAction"
+                          method="post" id="deleteForm" onsubmit="deleteTemplate(event);">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <input type="hidden" name="PageIndex" value="@PageIndex" />
+                        <input type="hidden" name="maxOrder" value="@maxOrder" />
+                        <button class="btn btn-danger">
+                            <i class='fa-solid fa-trash-can' style='max-width:2rem;'></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="MainInfo">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Main Info</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="mt-3">
+                        <div class="row justify-content-between">
+                            <div class="form-group col-md-6 col-sm-12 mb-3">
+                                <label>Name</label>
+                                <label class="value-lable">
+                                    @if (!string.IsNullOrWhiteSpace(Model.Name))
+                                    {
+                                        <span>@Model.Name </span>
+                                    }
+                                    else
+                                    {
+                                        <span><i class="fa-solid fa-window-minimize"></i></span>
+                                    }
+                                </label>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12 mb-3">
+                                <label>Class</label>
+                                <label class="value-lable">
+                                    @if (!string.IsNullOrWhiteSpace(Model.ClassName))
+                                    {
+                                        <span>@Model.ClassName </span>
+                                    }
+                                    else
+                                    {
+                                        <span><i class="fa-solid fa-window-minimize"></i></span>
+                                    }
+                                </label>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12 mb-3">
+                                <label>Price</label>
+                                <label class="value-lable">
+                                    @if (Model.Price != null)
+                                    {
+                                        <span>@Model.Price </span>
+                                    }
+                                    else
+                                    {
+                                        <span><i class="fa-solid fa-window-minimize"></i></span>
+                                    }
+                                </label>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12 mb-3">
+                                <label>Order No</label>
+                                <label class="value-lable">
+                                    @if (Model.OrderNo != null)
+                                    {
+                                        <span>@Model.OrderNo </span>
+                                    }
+                                    else
+                                    {
+                                        <span><i class="fa-solid fa-window-minimize"></i></span>
+                                    }
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="_modaltriggermodal" />
+@section Script{
+    <script src="~/staticfiles/plmanagementsystem/viewsfiels/js/lessongroups.js"></script>
+}

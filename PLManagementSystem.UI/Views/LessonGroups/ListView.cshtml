@@ -67,9 +67,10 @@
                             <tbody>
                                 @foreach (var item in tablelist)
                                 {
-                                    var urlEdit = Url.Action(nameof(LessonGroupsController.Edit), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}";
-                                    var urlChangePosition = Url.Action(nameof(LessonGroupsController.ChangePosition), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}&maxOrder={Model.TotalItemCount}&orderNo={item.OrderNo}";
-                                    var urlDelete = Url.Action(nameof(LessonGroupsController.Delete), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}";
+                                    var urlDetails = Url.Action(nameof(LessonGroupsController.Details), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}&maxOrder={Model.TotalItemCount}";
+                                    //var urlEdit = Url.Action(nameof(LessonGroupsController.Edit), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}";
+                                   // var urlChangePosition = Url.Action(nameof(LessonGroupsController.ChangePosition), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}&maxOrder={Model.TotalItemCount}&orderNo={item.OrderNo}";
+                                    //var urlDelete = Url.Action(nameof(LessonGroupsController.Delete), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}&PageIndex={Model.PageIndex}";
                                     <tr data-id="@item.Id" data-ordernumber="@item.OrderNo" data-PageIndex="@Model.PageIndex" data-Name="@item.Name" class="trCenter text-wrap">
                                         <td class="SortColume">
                                             <div style='float: right; ' class='btn-group pull-right'><i class='fa fa-fw fa-arrows-alt'></i> </div>
@@ -94,7 +95,8 @@
                                             @Html.DisplayFor(modelItem => item.OrderNo)
                                         </td>
                                         <td class="fit ui-state-disabled" style="text-align: right !important;">
-                                            <a class="nav-link " data-toggle="dropdown" href="#">
+                                            <a href="@urlDetails"> <span class="fa-solid fa-info-circle"></span></a>
+                                            @* <a class="nav-link " data-toggle="dropdown" href="#">
                                                 <i class="fa fa-ellipsis-h"></i>
                                             </a>
                                             <div class="dropdown-menu">
@@ -107,7 +109,7 @@
                                                 <a class="hand dropdown-item" onclick='return showInPopup("@urlChangePosition","Change Position")'>
                                                     <span class="fa fa-arrows-alt"></span> Change Position
                                                 </a>
-                                            </div>
+                                            </div> *@
                                         </td>
                                     </tr>
                                 }

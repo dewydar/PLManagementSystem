@@ -10,10 +10,12 @@
     var ClassesList = ViewBag.ClassesList;
     var CurrentPageIndex = ViewData["PageIndex"];
 }
-
-<form id="MyModalForm" asp-route-id="@Model.Id" asp-all-route-data="@QueryStringDictionary" asp-route-PageIndex="@CurrentPageIndex"
-      asp-action="@nameof(LessonGroupsController.Edit)" onsubmit="return jQueryAjaxPost(this);">
-    <div class="box-body">
+<form asp-controller="@nameof(LessonGroupsController).Replace("Controller",string.Empty)" asp-action="@nameof(LessonGroupsController.Edit)"
+    asp-route-id="@Model.Id"
+      data-ajax-method="post" data-ajax="true" id="MyModalForm"
+      data-ajax-failure="OnFailure" data-ajax-success="OnSuccess" data-ajax-begin="OnBegin">
+    <div class="modal-body p-3">
+        <input type="hidden" id="formType" value="edit"/>
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="IsDeleted" />
         <input type="hidden" asp-for="OrderNo" />
@@ -38,20 +40,6 @@
                 <input asp-for="Price" class="form-control" />
                 <span class="validation" asp-validation-for="Price"></span>
             </div>
-           @*  <div class="col-md-4 col-sm-12">
-                <label>Day</label>
-                <select asp-for="DayId" asp-items="DayesList" class="form-control select2">
-                    <option>-- Select --</option>
-                </select>
-                <span class="validation" asp-validation-for="DayId"></span>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <label>Time</label>
-                <input asp-for="Time" class="form-control" type="time"/>
-                <span class="validation" asp-validation-for="Time"></span>
-            </div> *@
-           
-            
         </div>
     </div>
 </form>

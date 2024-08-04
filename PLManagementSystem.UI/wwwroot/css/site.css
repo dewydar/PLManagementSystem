@@ -20,3 +20,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+/*  Details background */
+.details-background {
+    background-color: white;
+}
+/*  Details background */
+.dark-mode .details-background {
+    background-color: #343a40;
+}
+
+.value-lable {
+    display: block;
+    font-weight: 400 !important;
+}
