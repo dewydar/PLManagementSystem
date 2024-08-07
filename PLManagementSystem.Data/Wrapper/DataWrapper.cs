@@ -17,6 +17,7 @@ namespace PLManagementSystem.Data.Wrapper
         private IGenericRepository<Day> _dayRepository;
         private IGenericRepository<Class> _classRepository;
         private IGenericRepository<LessonGroups> _lessonGroupsRepository;
+        private IGenericRepository<LessonGroupsDays> _lessonGroupsDaysRepository;
         public DataWrapper(AppDbContext context, IServiceProvider serviceProvider)
         {
             _context = context;
@@ -80,6 +81,18 @@ namespace PLManagementSystem.Data.Wrapper
                     _lessonGroupsRepository = new GenericRepository<LessonGroups>(_context, logger);
                 }
                 return _lessonGroupsRepository;
+            }
+        }
+        public IGenericRepository<LessonGroupsDays> LessonGroupsDaysRepository
+        {
+            get
+            {
+                if (_lessonGroupsDaysRepository == null)
+                {
+                    var logger = _serviceProvider.GetRequiredService<ILogger<GenericRepository<LessonGroupsDays>>>();
+                    _lessonGroupsDaysRepository = new GenericRepository<LessonGroupsDays>(_context, logger);
+                }
+                return _lessonGroupsDaysRepository;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using PLManagementSystem.Core.Entities;
+﻿using PLManagementSystem.Core.Dtos.Request;
+using PLManagementSystem.Core.Entities;
 using PLManagementSystem.Core.Interfaces.IDal;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace PLManagementSystem.Core.Interfaces.IWrapper
         public IGenericRepository<Day> DayRepository { get; }
         public IGenericRepository<Class> ClassRepository { get; }
         public IGenericRepository<LessonGroups> LessonGroupsRepository { get; }
+        public IGenericRepository<LessonGroupsDays> LessonGroupsDaysRepository { get; }
 
     }
 }

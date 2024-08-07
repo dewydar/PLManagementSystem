@@ -33,6 +33,13 @@ namespace PLManagementSystem.Service.MappProfile
                 .ForMember(dest => dest.ClassName, opts => opts.MapFrom(src => src.Classes.Name))
                 .ReverseMap();
             #endregion
+            #region Lesson Groups Days
+            CreateMap<LessonGroupsDays, RequestLessonGroupsDaysDto>().ReverseMap();
+            CreateMap<ResponseLessonGroupsDaysDto, LessonGroupsDays>().ReverseMap()
+                .ForMember(dest => dest.DayName, opts => opts.MapFrom(src => src.Dayes.Name))
+                .ForMember(dest => dest.LessonGroupName, opts => opts.MapFrom(src => src.LessonGroup.Name))
+                .ReverseMap();
+            #endregion
         }
     }
 }

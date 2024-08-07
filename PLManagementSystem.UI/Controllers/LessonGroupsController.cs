@@ -206,8 +206,6 @@ namespace PLManagementSystem.UI.Controllers
         {
             ViewBag.ClassesList = (await _service.ClassesList())
                 ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
-            ViewBag.DayesList = (await _service.DayesList())
-                ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
             return PartialView();
         }
 
@@ -274,8 +272,6 @@ namespace PLManagementSystem.UI.Controllers
             ViewData["PageIndex"] = PageIndex;
             ViewBag.ClassesList = (await _service.ClassesList())
                 ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
-            ViewBag.DayesList = (await _service.DayesList())
-                ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
             return PartialView(ItemToEdit);
         }
         [HttpPost, ActionName("Edit")]
@@ -303,8 +299,7 @@ namespace PLManagementSystem.UI.Controllers
 
                 return Json(new
                 {
-                    isValid = false,
-                    html = RazorHelper.RenderRazorViewToString(this, "Edit", RecordUpdated),
+                    isSucceeded = false,
                     errorMessage = message
                 });
             }

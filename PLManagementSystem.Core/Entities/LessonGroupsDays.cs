@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PLManagementSystem.Core.Entities
 {
-    public class LessonGroupsDays
+    public class LessonGroupsDays:BaseClass
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

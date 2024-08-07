@@ -1,6 +1,5 @@
 ﻿@model RequestLessonGroupsDto
 @{
-    var DayesList = ViewBag.DayesList;
     var ClassesList = ViewBag.ClassesList;
 }
 <form id="MyModalForm" asp-action="@nameof(ClassController.Create)" onsubmit="return jQueryAjaxPost(this);">
@@ -29,22 +28,6 @@
                         <span class="validation" asp-validation-for="Price"></span>
                     </div>
                 </div>
-                @* <div class="col-md-4 col-sm-12">
-                    <label>Day</label>
-                    <select asp-for="DayId" asp-items="DayesList" class="form-control select2">
-                        <option value="">-- Select --</option>
-                    </select>
-                    <span class="validation" asp-validation-for="DayId"></span>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <div class="form-group mb-3">
-                        <label>Time</label>
-                        <input asp-for="Time" class="form-control" type="time"/>
-                        <span class="validation" asp-validation-for="Time"></span>
-                    </div>
-                </div> *@
-
-
             </div>
         </div>
 

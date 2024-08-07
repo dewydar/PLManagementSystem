@@ -88,13 +88,17 @@ var OnSuccess = function (response) {
         var id = $('#Id').val();
             LoadMainInfo(id);
         } else {
-           // LoadComponents();
+            LoadDays();
         }
         $('#modal-trigger .modal-title').text('');
         $('#modal-trigger .modal-body').html('');
         $('#modal-trigger').modal('hide');
     } else {
         toastr.error(response.message);
+
+        $('#form-modal .ErrorDiv').html(res.errorMessage);
+
+        $('#form-modal .ErrorDiv').show();
     }
 }
 var deleteTemplate = function (e) {
@@ -118,5 +122,15 @@ var deleteTemplate = function (e) {
         } else {
             return false;
         }
+    })
+}
+var LoadDays = function () {
+    var endPoint = $('#daysEndPoint').val();
+    $.ajax({
+        method: "get",
+        url: endPoint
+    }).done(data => {
+        $('#DaysDiv').html('');
+        $('#DaysDiv').html(data);
     })
 }

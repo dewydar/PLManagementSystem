@@ -8,11 +8,14 @@
     string editAction = nameof(LessonGroupsController.Edit);
     string changePositionAction = nameof(LessonGroupsController.ChangePosition);
     string loadMainInfoAction = Url.Action(nameof(LessonGroupsController.MainInfo), controller);
+    var daysEndPoint = Url.Action(nameof(LessonGroupsDaysController.Index), nameof(LessonGroupsDaysController).Replace("Controller",string.Empty),
+    null, Context.Request.Scheme) + $"?lessonGroupId={Model.Id}";
 }
 <input type="hidden" value="@loadMainInfoAction" id="loadMainInfoAction" />
 <input type="hidden" id="deleteComponentAction" confirmButtonTextMSG="Delete" textDeleteMSG="Yes, delete group." titleDeleteMSG="Yes, delete group." />
 <input type="hidden" id="editTemplateAction" value="@editAction" errorMSG="Error" titleTXT="edit" />
 <input type="hidden" id="changePositionAction" value="@changePositionAction" errorMSG="Error" titleTXT="Change Position" />
+<input type="hidden" id="daysEndPoint" value="@daysEndPoint" />
 <div class="row justify-content-between">
     <div class="col-sm-12">
         <div class="card breadcrumb-header justify-content-between" id="Header">
@@ -111,6 +114,7 @@
                 </div>
             </div>
         </div>
+        <div id="DaysDiv"></div>
     </div>
 </div>
 <partial name="_modaltriggermodal" />

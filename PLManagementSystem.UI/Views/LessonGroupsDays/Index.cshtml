@@ -1,0 +1,70 @@
+﻿@model List<ResponseLessonGroupsDaysDto>
+@{
+    int lessonGroupId = ViewBag.lessonGroupId;
+    string ControllerName = nameof(LessonGroupsDaysController).Replace("Controller", string.Empty);
+    string addLink = Url.Action(nameof(LessonGroupsDaysController.Create), ControllerName, null, Context.Request.Scheme) + $"?lessonGroupId={lessonGroupId}";
+}
+<input type="hidden" id="deleteAction" confirmButtonTextMSG="Delete" textDeleteMSG="Yes, delete day." titleDeleteMSG="Yes, delete day." />
+<div class="mt-3">
+    <div class="row justify-content-between">
+        <div class="col-sm-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title mt-2">Days</h3>
+                    <div class="card-tools">
+                        <a onclick='return openForm(`@addLink`,`Add Day`)' href='javascript:void(0)' class="btn btn-clear"><span style="color: #01084d">Add Day <i class="fa-solid fa-plus"></i></span></a>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div class="mt-3">
+                        <div class="row justify-content-between">
+                            <div class="col-12">
+                                <div class="tree-table-wrap">
+                                    <table id="DayTable" class="table table-bordered table-striped" style=" width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Day</th>
+                                                <th>Time</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                var urlEdit = Url.Action(nameof(LessonGroupsDaysController.Edit), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}";
+                                                <tr>
+                                                    <td>@item.DayName</td>
+                                                    <td>@item.Time</td>
+                                                    <td>
+                                                        <a class="nav-link " data-toggle="dropdown" href="#">
+                                                            <i class="fa fa-ellipsis-h"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu">
+                                                            <form asp-controller="@ControllerName" asp-action="@nameof(LessonGroupsDaysController.Delete)"
+                                                                  method="post" id="deleteDaysForm" onsubmit="deleteDay(event);">
+                                                                <input type="hidden" name="id" value="@item.Id" />
+                                                                <button class="hand dropdown-item">
+                                                                    <i class='fa-solid fa-trash-can' style='max-width:2rem;'></i>
+                                                                </button>
+                                                            </form>
+                                                            
+                                                            <a class="hand dropdown-item" onclick='return openForm("@urlEdit","Edit Day")'>
+                                                                <span class="fa fa-edit"></span> Edit
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/staticfiles/plmanagementsystem/viewsfiels/js/lessongroupdays.js"></script>
