@@ -36,7 +36,7 @@ namespace PLManagementSystem.UI.Controllers
             {
                 ResultDictionary.Add("name", filter.name.Trim());
             }
-            if (filter.classId!=null)
+            if (filter.classId != null)
             {
                 ResultDictionary.Add("classId", filter.classId.ToString());
             }
@@ -187,7 +187,7 @@ namespace PLManagementSystem.UI.Controllers
         }
         #endregion
         #region Details
-        public async Task<IActionResult> Details(int id,int maxOrder, int PageIndex = -1)
+        public async Task<IActionResult> Details(int id, int maxOrder, int PageIndex = -1)
         {
             ViewBag.PageIndex = PageIndex;
             ViewBag.maxOrder = maxOrder;
@@ -439,7 +439,7 @@ namespace PLManagementSystem.UI.Controllers
             return await GetListViewAsJson(PageIndex: PageIndex, message: OpResult.Message);
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(int id,int maxOrder, int PageIndex = -1)
+        public async Task<IActionResult> Delete(int id, int maxOrder, int PageIndex = -1)
         {
             var OpResult = await _service.SoftDelete(id);
             TempData["Message"] = OpResult.Message;
@@ -450,7 +450,7 @@ namespace PLManagementSystem.UI.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(Details), new { id = id, maxOrder= maxOrder, PageIndex = PageIndex });
+                return RedirectToAction(nameof(Details), new { id = id, maxOrder = maxOrder, PageIndex = PageIndex });
             }
         }
         #endregion

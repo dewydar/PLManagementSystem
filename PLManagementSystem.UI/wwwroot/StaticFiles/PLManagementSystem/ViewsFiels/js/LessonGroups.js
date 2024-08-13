@@ -1,4 +1,7 @@
-﻿// load template details
+﻿$(() => {
+    LoadDays();
+})
+// load template details
 var LoadMainInfo = function (id) {
     var endPoint = $('#loadMainInfoAction').val();
     $.ajax({

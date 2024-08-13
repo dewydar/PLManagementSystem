@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PLManagementSystem.Core.Dtos.Request;
-using PLManagementSystem.Core.Entities;
 using PLManagementSystem.Core.Interfaces.IService;
-using PLManagementSystem.Helpers.Sheard;
-using PLManagementSystem.service.Services;
 using PLManagementSystem.UI.Helpers;
 
 namespace PLManagementSystem.UI.Controllers
@@ -15,13 +12,13 @@ namespace PLManagementSystem.UI.Controllers
 
         public LessonGroupsDaysController(ILessonGroupsDaysService service)
         {
-            _service=service;
+            _service = service;
         }
         #region View
         public async Task<IActionResult> Index(int lessonGroupId)
         {
             ViewBag.LessonGroupId = lessonGroupId;
-            var entities=await _service.GetAll(lessonGroupId);
+            var entities = await _service.GetAll(lessonGroupId);
             return PartialView(entities);
         }
         #endregion
@@ -31,9 +28,9 @@ namespace PLManagementSystem.UI.Controllers
         {
             RequestLessonGroupsDaysDto dto = new RequestLessonGroupsDaysDto()
             {
-                Id=0,
+                Id = 0,
                 LessonGroupId = lessonGroupId,
-                IsDeleted=false
+                IsDeleted = false
             };
             ViewBag.DayesList = (await _service.DayesList())
                 ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
