@@ -60,9 +60,9 @@ namespace PLManagementSystem.UI.Controllers
 
                 return Json(new
                 {
-                    isValid = false,
+                    isSucceeded = false,
                     html = RazorHelper.RenderRazorViewToString(this, "Create", NewRecord),
-                    errorMessage = message
+                    message = message
                 });
             }
 
@@ -76,18 +76,20 @@ namespace PLManagementSystem.UI.Controllers
         #endregion
         #region Edit
         [HttpGet]
-        public async Task<IActionResult> Edit(int id, int PageIndex)
+        public async Task<IActionResult> Edit(int id)
         {
             var ItemToEdit = await _service.GetById(id);
             if (ItemToEdit == null)
             {
                 return RedirectToAction("Error", "Home");
             }
+            ViewBag.DayesList = (await _service.DayesList())
+                ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
             return PartialView(ItemToEdit);
         }
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [FromForm] RequestLessonGroupsDaysDto RecordUpdated, int PageIndex)
+        public async Task<IActionResult> Edit(int id, [FromForm] RequestLessonGroupsDaysDto RecordUpdated)
         {
             if (id != RecordUpdated.Id)
             {
@@ -110,9 +112,9 @@ namespace PLManagementSystem.UI.Controllers
 
                 return Json(new
                 {
-                    isValid = false,
+                    isSucceeded = false,
                     html = RazorHelper.RenderRazorViewToString(this, "Edit", RecordUpdated),
-                    errorMessage = message
+                    message = message
                 });
             }
             var OpResult = await _service.Edit(RecordUpdated);
@@ -128,7 +130,7 @@ namespace PLManagementSystem.UI.Controllers
         public async Task<IActionResult> Delete(int id, int PageIndex)
         {
             var OpResult = await _service.Delete(id);
-            return Json(new { isValid = false, Message = OpResult.Message });
+            return Json(new { isSucceeded = OpResult.IsSucceeded, message = OpResult.Message });
         }
         #endregion
     }

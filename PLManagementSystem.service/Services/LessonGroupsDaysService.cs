@@ -7,11 +7,6 @@ using PLManagementSystem.Core.Interfaces.IWrapper;
 using PLManagementSystem.Helpers.Enum;
 using PLManagementSystem.Helpers.Helpers;
 using PLManagementSystem.Helpers.ResourceFiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLManagementSystem.service.Services
 {
@@ -33,7 +28,7 @@ namespace PLManagementSystem.service.Services
         public async Task<List<ResponseLessonGroupsDaysDto>> GetAll(int lessonGroupId, bool ignoreIsDeletedQueryFilter = false)
         {
             var entities = await _dataWrapper.LessonGroupsDaysRepository.GetItemsAsNoTracking(filter: z => z.LessonGroupId == lessonGroupId,
-                ignoreIsDeletedQueryFilter: ignoreIsDeletedQueryFilter);
+                ignoreIsDeletedQueryFilter: ignoreIsDeletedQueryFilter, includes: z => z.Dayes);
             return _Mapper.Map<List<ResponseLessonGroupsDaysDto>>(entities);
         }
         #endregion
@@ -44,7 +39,7 @@ namespace PLManagementSystem.service.Services
             {
 
                 var entity = _Mapper.Map<LessonGroupsDays>(dto);
-                var MaxId = await _dataWrapper.ClassRepository.GetMaxAsNoTracking(filter: z => z.Id, ignoreIsDeletedQueryFilter: true);
+                var MaxId = await _dataWrapper.LessonGroupsDaysRepository.GetMaxAsNoTracking(filter: z => z.Id, ignoreIsDeletedQueryFilter: true);
                 entity.Id = MaxId + 1;
                 entity.IsDeleted = false;
                 await _dataWrapper.LessonGroupsDaysRepository.Add(entity);

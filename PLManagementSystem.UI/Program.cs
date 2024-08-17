@@ -3,7 +3,6 @@ using PLManagementSystem.Data.Entites;
 using PLManagementSystem.Service.MappProfile;
 using PLManagementSystem.Service.Services;
 using PLManagementSystem.UI.ServiceExtensions;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-DependencyExtensions.ConfigureDependencyExtensions(services:builder.Services, typeof(UserService).Assembly);
+DependencyExtensions.ConfigureDependencyExtensions(services: builder.Services, typeof(UserService).Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,4 +1,4 @@
-﻿var openForm = function (endPoint,title) {
+﻿var openForm = function (endPoint, title) {
     $.ajax({
         url: endPoint,
         method: 'GET'
@@ -11,13 +11,10 @@
         $('#modal-trigger').modal('show');
     })
 }
-var deleteDay = function (e) {
+var deleteDay = function (urlDelete) {
     var confirmButtonTextMSG = $('#deleteAction').attr('confirmButtonTextMSG');
     var textDeleteMSG = $('#deleteAction').attr('textDeleteMSG');
     var titleDeleteMSG = $('#deleteAction').attr('titleDeleteMSG');
-    e.preventDefault();
-    var resultTitleMessage = '';
-    resultTitleMessage = titleDeleteMSG;
     Swal.fire({
         title: titleDeleteMSG,
         text: textDeleteMSG,
@@ -28,9 +25,20 @@ var deleteDay = function (e) {
         confirmButtonText: confirmButtonTextMSG
     }).then((result) => {
         if (result.isConfirmed) {
-            document.getElementById("deleteDaysForm").submit();
-        } else {
-            return false;
+            var endPoint = urlDelete;
+            $.ajax({
+                type: 'Delete',
+                url: urlDelete,
+                success: function (response) {
+                    if (response.isSucceeded) {
+                        toastr.success(response.message);
+                        LoadDays();
+                    }
+                    else if (!response.isSucceeded) {
+                        toastr.error(response.message);
+                    }
+                }
+            });
         }
     })
 }

@@ -1,0 +1,33 @@
+﻿@model RequestLessonGroupsDaysDto
+@{
+    var DayesList = ViewBag.DayesList;
+}
+<form asp-controller="@nameof(LessonGroupsDaysController).Replace("Controller",string.Empty)" asp-action="@nameof(LessonGroupsDaysController.Edit)"
+      asp-route-id="@Model.Id"
+      data-ajax-method="post" data-ajax="true" id="MyModalForm"
+      data-ajax-failure="OnFailure" data-ajax-success="OnSuccess" data-ajax-begin="OnBegin">
+    <div class="modal-body p-3">
+        <input type="hidden" id="formType" value="form-day" />
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="LessonGroupId" />
+        <input type="hidden" asp-for="IsDeleted" />
+        <div style="display:none" class="callout callout-danger ErrorDiv"></div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <label>Day</label>
+                <select asp-for="DayId" asp-items="DayesList" class="form-control select2">
+                    <option value="">-- Select --</option>
+                </select>
+                <span class="validation" asp-validation-for="DayId"></span>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <label>Time</label>
+                <input asp-for="Time" class="form-control" type="time" />
+                <span class="validation" asp-validation-for="Time"></span>
+            </div>
+        </div>
+    </div>
+</form>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

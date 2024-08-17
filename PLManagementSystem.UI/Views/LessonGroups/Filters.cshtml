@@ -1,6 +1,6 @@
 ﻿@model LessonGroupsFilterVM
 @{
-    var DayesList = ViewBag.DayesList;
+    // var DayesList = ViewBag.DayesList;
     var ClassesList = ViewBag.ClassesList;
 }
 <form asp-action="GetListFromFilters">
@@ -19,12 +19,12 @@
                                 <option>-- Select --</option>
                             </select>
                         </div>
-                        <div class="col-md-4 col-sm-12">
-                            <label>Day</label>
-                            <select asp-for="dayId" asp-items="DayesList" class="form-control select2">
-                                <option>-- Select --</option>
-                            </select>
-                        </div>
+                        @*  <div class="col-md-4 col-sm-12">
+                        <label>Day</label>
+                        <select asp-for="dayId" asp-items="DayesList" class="form-control select2">
+                        <option>-- Select --</option>
+                        </select>
+                        </div> *@
                     </div>
                 </div>
                 <div class="card-footer">

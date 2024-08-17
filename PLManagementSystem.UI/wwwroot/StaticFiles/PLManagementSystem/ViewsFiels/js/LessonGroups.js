@@ -88,9 +88,9 @@ var OnSuccess = function (response) {
         toastr.success(response.message);
         var formType = $('#formType').val();
         if (formType == "edit") {
-        var id = $('#Id').val();
+            var id = $('#Id').val();
             LoadMainInfo(id);
-        } else {
+        } else if (formType == "form-day") {
             LoadDays();
         }
         $('#modal-trigger .modal-title').text('');
@@ -99,9 +99,9 @@ var OnSuccess = function (response) {
     } else {
         toastr.error(response.message);
 
-        $('#form-modal .ErrorDiv').html(res.errorMessage);
+        $('#modal-trigger .ErrorDiv').html(response.message);
 
-        $('#form-modal .ErrorDiv').show();
+        $('#modal-trigger .ErrorDiv').show();
     }
 }
 var deleteTemplate = function (e) {

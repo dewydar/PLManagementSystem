@@ -35,6 +35,7 @@
                                                 @foreach (var item in Model)
                                                 {
                                                     var urlEdit = Url.Action(nameof(LessonGroupsDaysController.Edit), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}";
+                                                    var urlDelete = Url.Action(nameof(LessonGroupsDaysController.Delete), ControllerName, null, Context.Request.Scheme) + $"?id={item.Id}";
                                                     <tr>
                                                         <td>@item.DayName</td>
                                                         <td>@item.Time</td>
@@ -43,14 +44,9 @@
                                                                 <i class="fa fa-ellipsis-h"></i>
                                                             </a>
                                                             <div class="dropdown-menu">
-                                                                <form asp-controller="@ControllerName" asp-action="@nameof(LessonGroupsDaysController.Delete)"
-                                                                      method="post" id="deleteDaysForm" onsubmit="deleteDay(event);">
-                                                                    <input type="hidden" name="id" value="@item.Id" />
-                                                                    <button class="hand dropdown-item">
-                                                                        <i class='fa-solid fa-trash-can' style='max-width:2rem;'></i>
-                                                                    </button>
-                                                                </form>
-
+                                                                <a class="hand dropdown-item" onclick='return deleteDay("@urlDelete")'>
+                                                                    <span class="fa-solid fa-trash-can"></span> Delete
+                                                                </a>
                                                                 <a class="hand dropdown-item" onclick='return openForm("@urlEdit","Edit Day")'>
                                                                     <span class="fa fa-edit"></span> Edit
                                                                 </a>

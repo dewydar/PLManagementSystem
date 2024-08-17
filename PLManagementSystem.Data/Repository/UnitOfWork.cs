@@ -1,10 +1,5 @@
 ﻿using PLManagementSystem.Core.Interfaces.IDal;
 using PLManagementSystem.Data.Entites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLManagementSystem.Data.Repository
 {

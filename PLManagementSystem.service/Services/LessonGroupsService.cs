@@ -1,23 +1,18 @@
 ﻿using AutoMapper;
+using PLManagementSystem.Core.Dtos;
 using PLManagementSystem.Core.Dtos.Request;
 using PLManagementSystem.Core.Dtos.Response;
-using PLManagementSystem.Core.Dtos;
 using PLManagementSystem.Core.Entities;
 using PLManagementSystem.Core.Interfaces.IService;
 using PLManagementSystem.Core.Interfaces.IWrapper;
 using PLManagementSystem.Helpers.Enum;
 using PLManagementSystem.Helpers.Helpers;
 using PLManagementSystem.Helpers.ResourceFiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLManagementSystem.service.Services
 {
-    public class LessonGroupsService: ILessonGroupsService
+    public class LessonGroupsService : ILessonGroupsService
     {
         private readonly IDataWrapper _dataWrapper;
         private readonly IMapper _Mapper;
@@ -30,14 +25,14 @@ namespace PLManagementSystem.service.Services
         public async Task<RequestLessonGroupsDto> GetById(int id, bool ignoreIsDeletedQueryFilter = false)
         {
             var entity = await _dataWrapper.LessonGroupsRepository.GetItem(filter: z => z.Id == id, ignoreIsDeletedQueryFilter: ignoreIsDeletedQueryFilter,
-                includes: new Expression<Func<LessonGroups, object>>[] { z => z.Classes});
+                includes: new Expression<Func<LessonGroups, object>>[] { z => z.Classes });
             return _Mapper.Map<RequestLessonGroupsDto>(entity);
         }
         public async Task<ResponseLessonGroupsDto> GetByIdAsNoTracking(int id, bool ignoreIsDeletedQueryFilter = false)
         {
             var entity = await _dataWrapper.LessonGroupsRepository.GetItemAsNoTracking(filter: z => z.Id == id,
                 ignoreIsDeletedQueryFilter: ignoreIsDeletedQueryFilter,
-                includes:new Expression<Func<LessonGroups, object>>[] {z=>z.Classes});
+                includes: new Expression<Func<LessonGroups, object>>[] { z => z.Classes });
             return _Mapper.Map<ResponseLessonGroupsDto>(entity);
         }
         public async Task<List<RequestLessonGroupsDto>> GetAll(bool ignoreIsDeletedQueryFilter = false)
@@ -80,7 +75,7 @@ namespace PLManagementSystem.service.Services
                 search.Add(z => z.Name.ToLower().Contains(name.ToLower())
                 || z.Name.ToLower() == name.ToLower());
             }
-            if (classId!=null)
+            if (classId != null)
             {
                 search.Add(z => z.ClassId == classId);
             }
@@ -89,7 +84,8 @@ namespace PLManagementSystem.service.Services
                 search.Add(z => z.LessonGroupsDays.Where(z => z.DayId == dayId).ToList() != null);
             }
             PagedList<LessonGroups> PagedResult = await _dataWrapper.LessonGroupsRepository.GetPagginationItems(search, Sort, sortDirection, offset, limit,
-                ignoreIsDeletedQueryFilter: ignoreIsDeletedQueryFilter, includes: new Expression<Func<LessonGroups, object>>[] { z => z.Classes });
+                ignoreIsDeletedQueryFilter: ignoreIsDeletedQueryFilter,
+                includes: new Expression<Func<LessonGroups, object>>[] { z => z.Classes, z => z.LessonGroupsDays });
 
             var result = _Mapper.Map<List<ResponseLessonGroupsDto>>(PagedResult.ToList());
 

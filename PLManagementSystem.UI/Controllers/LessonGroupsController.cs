@@ -125,7 +125,7 @@ namespace PLManagementSystem.UI.Controllers
 
             ViewData["filters"] = FiltersModel;
             ViewData["SortModel"] = SortModel;
-            var ProxyResponse = await _service.GetAllPaginantion(name: FiltersModel.name,
+            var ProxyResponse = await _service.GetAllPaginantion(name: FiltersModel.name, classId: FiltersModel.classId, dayId: FiltersModel.dayId,
                 offset: PageIndex, limit: 10, sortColumn: SortModel.SortColumn, sortDirection: SortModel.SortDirection);
 
             if (ProxyResponse == null)
@@ -135,8 +135,8 @@ namespace PLManagementSystem.UI.Controllers
             }
             ViewBag.ClassesList = (await _service.ClassesList())
                 ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
-            ViewBag.DayesList = (await _service.DayesList())
-                ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
+            //ViewBag.DayesList = (await _service.DayesList())
+            //    ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
             var paginationResponseModelV2 = new PaginationResponseModelV2(PageIndex: PageIndex, ReturnData: (List<ResponseLessonGroupsDto>)ProxyResponse.ReturnData,
                 PageSize: 10, TotalItemCount: ProxyResponse.TotalItemCount, TotalPagesCount: ProxyResponse.TotalPagesCount);
 
@@ -165,7 +165,7 @@ namespace PLManagementSystem.UI.Controllers
 
             ViewData["filters"] = FiltersModel;
             ViewData["SortModel"] = SortModel;
-            var ProxyResponse = await _service.GetAllPaginantion(name: FiltersModel.name,
+            var ProxyResponse = await _service.GetAllPaginantion(name: FiltersModel.name, classId: FiltersModel.classId, dayId: FiltersModel.dayId,
                             offset: PageIndex, limit: 10, sortColumn: SortModel.SortColumn, sortDirection: SortModel.SortDirection);
             if (ProxyResponse == null)
             {
@@ -177,8 +177,8 @@ namespace PLManagementSystem.UI.Controllers
             }
             ViewBag.ClassesList = (await _service.ClassesList())
                 ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
-            ViewBag.DayesList = (await _service.DayesList())
-                ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
+            //ViewBag.DayesList = (await _service.DayesList())
+            //    ?.Select(z => new SelectListItem { Value = z.Id.ToString(), Text = z.Name }).ToList();
             var paginationResponseModelV2 = new PaginationResponseModelV2(PageIndex: PageIndex, ReturnData: (List<ResponseLessonGroupsDto>)ProxyResponse.ReturnData,
                 PageSize: 10, TotalItemCount: ProxyResponse.TotalItemCount, TotalPagesCount: ProxyResponse.TotalPagesCount);
             string viewFromCurrentController = RazorHelper.RenderRazorViewToString(this, "ListView", paginationResponseModelV2);
