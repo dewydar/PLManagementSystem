@@ -1,11 +1,5 @@
-﻿using PLManagementSystem.Core.Dtos.Request;
-using PLManagementSystem.Core.Entities;
+﻿using PLManagementSystem.Core.Entities;
 using PLManagementSystem.Core.Interfaces.IDal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLManagementSystem.Core.Interfaces.IWrapper
 {

@@ -2,10 +2,7 @@
 using PLManagementSystem.Core.Dtos.Request;
 using PLManagementSystem.Core.Dtos.Response;
 using PLManagementSystem.Core.Entities;
-using PLManagementSystem.Core.Interfaces.IService;
 using PLManagementSystem.Helpers.PassHelper;
-using System.Net;
-
 
 namespace PLManagementSystem.Service.MappProfile
 {
@@ -29,7 +26,7 @@ namespace PLManagementSystem.Service.MappProfile
             #endregion
             #region Lesson Groups
             CreateMap<LessonGroups, RequestLessonGroupsDto>().ReverseMap();
-            CreateMap<ResponseLessonGroupsDto,LessonGroups>().ReverseMap()
+            CreateMap<ResponseLessonGroupsDto, LessonGroups>().ReverseMap()
                 .ForMember(dest => dest.ClassName, opts => opts.MapFrom(src => src.Classes.Name))
                 .ReverseMap();
             #endregion

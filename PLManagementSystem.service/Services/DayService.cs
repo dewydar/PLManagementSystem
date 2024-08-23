@@ -6,18 +6,12 @@ using PLManagementSystem.Core.Interfaces.IService;
 using PLManagementSystem.Core.Interfaces.IWrapper;
 using PLManagementSystem.Helpers.Enum;
 using PLManagementSystem.Helpers.Helpers;
-using PLManagementSystem.Helpers.PassHelper;
 using PLManagementSystem.Helpers.ResourceFiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLManagementSystem.service.Services
 {
-    public class DayService: IDayService
+    public class DayService : IDayService
     {
         private readonly IDataWrapper _dataWrapper;
         private readonly IMapper _Mapper;

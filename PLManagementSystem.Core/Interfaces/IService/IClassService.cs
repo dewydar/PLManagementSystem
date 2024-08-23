@@ -1,14 +1,7 @@
 ﻿using PLManagementSystem.Core.Dtos;
 using PLManagementSystem.Core.Dtos.Request;
 using PLManagementSystem.Core.Dtos.Response;
-using PLManagementSystem.Core.Interfaces.IWrapper;
-using PLManagementSystem.Helpers.Enum;
 using PLManagementSystem.Helpers.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLManagementSystem.Core.Interfaces.IService
 {

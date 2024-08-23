@@ -1,9 +1,9 @@
-﻿using PLManagementSystem.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using PLManagementSystem.Core.Entities;
 using PLManagementSystem.Core.Interfaces.IDal;
 using PLManagementSystem.Data.Entites;
 using PLManagementSystem.Helpers.Helpers;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 
 namespace PLManagementSystem.Data.Repository

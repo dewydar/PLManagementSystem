@@ -1,13 +1,7 @@
-﻿using PLManagementSystem.Core.Dtos.Request;
+﻿using PLManagementSystem.Core.Dtos;
+using PLManagementSystem.Core.Dtos.Request;
 using PLManagementSystem.Core.Dtos.Response;
-using PLManagementSystem.Core.Dtos;
 using PLManagementSystem.Helpers.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PLManagementSystem.Core.Entities;
 
 namespace PLManagementSystem.Core.Interfaces.IService
 {
@@ -37,8 +31,8 @@ namespace PLManagementSystem.Core.Interfaces.IService
         Task<ResponseResult> UpdateOrderAsync(int id, UpdateOrderDto dto);
         #endregion
         #region Helpers
-        Task<List<ResponseClassDto>> ClassesList(); 
-        Task<List<ResponseDayDto>> DayesList(); 
+        Task<List<ResponseClassDto>> ClassesList();
+        Task<List<ResponseDayDto>> DayesList();
         #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿using PLManagementSystem.UI.Controllers;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace PLManagementSystem.UI.Helpers
 {
@@ -8,8 +7,8 @@ namespace PLManagementSystem.UI.Helpers
     {
         static Dictionary<string, List<string>> moduleControllers = new Dictionary<string, List<string>>
         {
-            
-            
+
+
         };
         public static string MakeActiveClass(this IUrlHelper urlHelper, string controller = "", string action = "", string area = "")
         {

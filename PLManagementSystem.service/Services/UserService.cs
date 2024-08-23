@@ -8,12 +8,7 @@ using PLManagementSystem.Helpers.Enum;
 using PLManagementSystem.Helpers.Helpers;
 using PLManagementSystem.Helpers.PassHelper;
 using PLManagementSystem.Helpers.ResourceFiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLManagementSystem.Service.Services
 {
@@ -49,7 +44,7 @@ namespace PLManagementSystem.Service.Services
                 sort: z => z.Id, sortDirection: "asc");
             return _Mapper.Map<List<ResponseUserDto>>(entities);
         }
-        public async Task<PaginationResponseModel> GetAllPaginantion(string? name = null,bool? isActive=null, string sortDirection = "asc",
+        public async Task<PaginationResponseModel> GetAllPaginantion(string? name = null, bool? isActive = null, string sortDirection = "asc",
             string sortColumn = "Id",
             int offset = 1, int limit = 10, bool ignoreIsDeletedQueryFilter = false)
         {
@@ -78,9 +73,9 @@ namespace PLManagementSystem.Service.Services
                 search.Add(z => z.Name.ToLower().Contains(name.ToLower())
                 || z.Name.ToLower() == name.ToLower());
             }
-            if (isActive!=null)
+            if (isActive != null)
             {
-                search.Add(z => z.IsActive== isActive);
+                search.Add(z => z.IsActive == isActive);
             }
             PagedList<User> PagedResult = await _dataWrapper.UserRepository.GetPagginationItems(search, Sort, sortDirection, offset, limit,
                 ignoreIsDeletedQueryFilter: ignoreIsDeletedQueryFilter);
@@ -103,7 +98,7 @@ namespace PLManagementSystem.Service.Services
                 entity.Id = MaxId + 1;
                 entity.IsActive = false;
                 entity.IsDeleted = false;
-                entity.Password =WebUiUtility.Encrypt($"P@$$w0rd:{entity.UserName}");
+                entity.Password = WebUiUtility.Encrypt($"P@$$w0rd:{entity.UserName}");
                 await _dataWrapper.UserRepository.Add(entity);
                 await _dataWrapper.UnitOfWork.Commit();
                 ResponseResult response = new ResponseResult()

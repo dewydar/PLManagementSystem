@@ -116,7 +116,7 @@ namespace PLManagementSystem.UI.Controllers
 
             ViewData["filters"] = FiltersModel;
             ViewData["SortModel"] = SortModel;
-            var ProxyResponse = await _service.GetAllPaginantion(name: FiltersModel.name, isActive:FiltersModel.isActive,
+            var ProxyResponse = await _service.GetAllPaginantion(name: FiltersModel.name, isActive: FiltersModel.isActive,
                 offset: PageIndex, limit: 10, sortColumn: SortModel.SortColumn, sortDirection: SortModel.SortDirection);
 
             if (ProxyResponse == null)
@@ -152,7 +152,7 @@ namespace PLManagementSystem.UI.Controllers
 
             ViewData["filters"] = FiltersModel;
             ViewData["SortModel"] = SortModel;
-            var ProxyResponse = await _service.GetAllPaginantion(name: FiltersModel.name, isActive:FiltersModel.isActive,
+            var ProxyResponse = await _service.GetAllPaginantion(name: FiltersModel.name, isActive: FiltersModel.isActive,
                             offset: PageIndex, limit: 10, sortColumn: SortModel.SortColumn, sortDirection: SortModel.SortDirection);
             if (ProxyResponse == null)
             {
