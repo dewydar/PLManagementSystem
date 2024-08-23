@@ -1,13 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.FileIO;
 using PLManagementSystem.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace PLManagementSystem.Data.Extensions
 {
@@ -17,6 +9,7 @@ namespace PLManagementSystem.Data.Extensions
         {
             modelBuilder.Dayes();
             modelBuilder.ClassesSeeding();
+            modelBuilder.ClassesUpgradeOrdering();
         }
         #region Private Seeding
         private static void Dayes(this ModelBuilder modelBuilder)
@@ -66,86 +59,147 @@ namespace PLManagementSystem.Data.Extensions
                 new Class
                 {
                     Id = 1,
-                    Name = "Third Grade Primary",
-                    ShortName = "Third Primary",
-                    OrderNo=1,
+                    Name = "First Grade Primary",
+                    ShortName = "First Primary",
+                    OrderNo = 1,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 2,
-                    Name = "Fourth Grade Primary",
-                    ShortName = "Fourth Primary",
+                    Name = "Second Grade Primary",
+                    ShortName = "Second Primary",
                     OrderNo = 2,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 3,
-                    Name = "Fifth Grade Primary",
-                    ShortName = "Fifth Primary",
+                    Name = "Third Grade Primary",
+                    ShortName = "Third Primary",
                     OrderNo = 3,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 4,
-                    Name = "Sixth Grade Primary",
-                    ShortName = "Sixth Primary",
+                    Name = "Fourth Grade Primary",
+                    ShortName = "Fourth Primary",
                     OrderNo = 4,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 5,
-                    Name = "First Grade Preparatory",
-                    ShortName = "First Prep",
+                    Name = "Fifth Grade Primary",
+                    ShortName = "Fifth Primary",
                     OrderNo = 5,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 6,
-                    Name = "Second Grade Preparatory",
-                    ShortName = "Second Prep",
+                    Name = "Sixth Grade Primary",
+                    ShortName = "Sixth Primary",
                     OrderNo = 6,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 7,
-                    Name = "Third Grade Preparatory",
-                    ShortName = "Third Prep",
+                    Name = "First Grade Preparatory",
+                    ShortName = "First Prep",
                     OrderNo = 7,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 8,
-                    Name = "First Grade Secondary",
-                    ShortName = "First Secondary",
+                    Name = "Second Grade Preparatory",
+                    ShortName = "Second Prep",
                     OrderNo = 8,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 9,
-                    Name = "Second Grade Secondary",
-                    ShortName = "Second Secondary",
+                    Name = "Third Grade Preparatory",
+                    ShortName = "Third Prep",
                     OrderNo = 9,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 10,
-                    Name = "Third Grade Secondary",
-                    ShortName = "Third Secondary",
+                    Name = "First Grade Secondary",
+                    ShortName = "First Secondary",
                     OrderNo = 10,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 11,
-                    Name = "First Grade Primary",
-                    ShortName = "First Primary",
+                    Name = "Second Grade Secondary",
+                    ShortName = "Second Secondary",
                     OrderNo = 11,
                     IsDeleted = false
                 }, new Class
                 {
                     Id = 12,
-                    Name = "Second Grade Primary",
-                    ShortName = "Second Primary",
+                    Name = "Third Grade Secondary",
+                    ShortName = "Third Secondary",
                     OrderNo = 12,
+                    IsDeleted = false
+                }
+            );
+        }
+        private static void ClassesUpgradeOrdering(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ClassesUpgradeOrdering>().HasData(
+                new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 1,
+                    UpperClassId = 2,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 2,
+                    UpperClassId = 3,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 3,
+                    UpperClassId = 4,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 4,
+                    UpperClassId = 5,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 5,
+                    UpperClassId = 6,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 6,
+                    UpperClassId = 7,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 7,
+                    UpperClassId = 8,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 8,
+                    UpperClassId = 9,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 9,
+                    UpperClassId = 10,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 10,
+                    UpperClassId = 11,
+                    IsDeleted = false
+                }, new ClassesUpgradeOrdering
+                {
+                    LowerClassId = 11,
+                    UpperClassId = 12,
                     IsDeleted = false
                 }
             );
